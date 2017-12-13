@@ -1,0 +1,162 @@
+input addCustomerInput {
+  first_name: String
+  last_name: String
+  email: String
+  gender: Gender
+}
+
+input addParrotInput {
+  name: String
+  size: Int
+  mass: Int
+  distribution: String
+  lifespan: Int
+  species: Species
+  code: String
+}
+
+type Customer {
+  id: ID!
+  first_name: String
+  last_name: String
+  email: String
+  gender: Gender
+}
+
+input delCustomerInput {
+  _id: ID!
+  email: String
+}
+
+enum Gender {
+  Female
+  Male
+}
+
+type Mutation {
+  addCustomer(input: addCustomerInput): Customer
+  setCustomer(input: setCustomerInput): Customer
+  delCustomer(input: delCustomerInput): Customer
+  addParrot(input: addParrotInput!): Parrot
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Parrot implements Node {
+  id: ID!
+  name: String
+  size: Int
+  mass: Float
+  distribution: String
+  description: String
+  lifespan: Int
+  species: Species
+  code: String
+}
+
+type ParrotConnection {
+  pageInfo: PageInfo!
+
+  # a list of edges
+  edges: [ParrotEdge]
+  count: Int!
+}
+
+type ParrotEdge {
+  cursor: String
+  node: Parrot
+}
+
+type Product implements Node {
+  id: ID!
+  sku: String
+  qty: Int
+  price: Int
+  parrot: Parrot
+  supplier: Supplier
+}
+
+type ProductConnection {
+  pageInfo: PageInfo!
+
+  # a list of edges
+  edges: [ProductEdge]
+  count: Int!
+}
+
+type ProductEdge {
+  cursor: String
+  node: Product
+}
+
+type Query {
+  customer(email: String): Customer
+  customers: [Customer]
+  supplier(id: ID, code: String): Supplier
+  suppliers(skip: Int, after: String, before: String, first: Int, last: Int): SupplierConnection
+  parrot(id: ID, code: String): Parrot
+  parrots(skip: Int, after: String, before: String, first: Int, last: Int): ParrotConnection
+  product(id: ID!): Product
+  products(skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection
+  bestSellers(skip: Int, after: String, before: String, first: Int, last: Int, supplierId: ID): ProductConnection
+}
+
+input setCustomerInput {
+  _id: ID!
+  email: String
+}
+
+enum Species {
+  macaws
+  conures
+  cockatoos
+  amazons
+}
+
+type Supplier implements Node {
+  id: ID!
+  name: String
+  address: String
+  code: String!
+  parrotsConnection(first: Int, after: String, last: Int, before: String): SupplierParrotsConnection
+}
+
+type SupplierConnection {
+  pageInfo: PageInfo!
+
+  # a list of edges
+  edges: [SupplierEdge]
+  count: Int!
+}
+
+type SupplierEdge {
+  cursor: String
+  node: Supplier
+}
+
+type SupplierParrotsConnection {
+  pageInfo: PageInfo!
+  edges: [SupplierParrotsEdge]
+}
+
+type SupplierParrotsEdge {
+  cursor: String
+  node: Parrot
+}
+
