@@ -17,19 +17,24 @@ const homeQuery = graphql`
 
 export default class App extends Component {
   render() {
-    return (
-      <QueryRenderer
-        environment={environment}
-        query={homeQuery}
-        render={({ error, props }) => {
-          if (error) {
-            return <div>{error.message}</div>;
-          } else if (props) {
-            return <Home {...props} />;
-          }
-          return <div>Loading</div>;
-        }}
-      />
-    );
+    return <Home />;
   }
 }
+
+// export default class App extends Component {
+//   render() {
+//     return (
+//       <QueryRenderer
+//         environment={environment}
+//         query={homeQuery}
+//         render={({ error, props }) => {
+//           if (error) {
+//             return <div>{error.message}</div>;
+//           } else if (props) {
+//             return <Home {...props} />;
+//           }
+//           return <div>Loading</div>;
+//         }}
+//       />
+//     );
+//   }
