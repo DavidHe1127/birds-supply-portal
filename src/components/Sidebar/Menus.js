@@ -14,7 +14,7 @@ const menus = [
     icon: 'calendar'
   },
   {
-    name: 'new_requests',
+    name: 'requests',
     label: 'New Requests',
     icon: 'newspaper'
   }
@@ -30,7 +30,7 @@ class Menus extends Component {
     return menus.map((x, i) => (
       <Menu.Item
         name={x.name}
-        active={path === x.name}
+        active={path.includes(x.name)}
         onClick={this.onClick}
         key={i}
       >
