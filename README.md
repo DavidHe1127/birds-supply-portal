@@ -1,6 +1,6 @@
 # Birds Supply Portal
 
-This app aims at providing a platform for suppliers to manage their products.
+This app aims at providing a platform for suppliers to provision/manage their products.
 
 ### TODOs
 * Design wireframe
