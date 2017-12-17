@@ -3,5 +3,5 @@
 This app aims at providing a platform for suppliers to provision/manage their products.
 
 ### TODOs
-* Add pusher
+* Add sidebar pusher
 * Design wireframe
