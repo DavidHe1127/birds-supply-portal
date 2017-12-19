@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import Requests from './Requests';
-import Products from './Products';
-import Events from './Events';
+import Requests from 'containers/Main/Requests';
+import Products from 'containers/Main/Products';
+import Events from 'containers/Main/Events';
 
 import Sidebar from 'components/Sidebar';
 
