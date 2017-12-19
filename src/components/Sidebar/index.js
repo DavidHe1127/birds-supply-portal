@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Sidebar as Sb, Menu } from 'semantic-ui-react';
 import Menus from './Menus';
