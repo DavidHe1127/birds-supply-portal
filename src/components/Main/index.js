@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
 import Requests from './Requests';
 import Products from './Products';
 import Events from './Events';
 
 import Sidebar from 'components/Sidebar';
+
+const MainWrapper = styled.div`
+  margin: 10px 10px 10px 150px;
+`;
 
 const withSidebar = C =>
   class extends React.Component {
@@ -13,7 +18,9 @@ const withSidebar = C =>
       return (
         <div>
           <Sidebar path={pathname} />
-          <C />
+          <MainWrapper>
+            <C />
+          </MainWrapper>
         </div>
       );
     }
