@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 
 import 'semantic-ui-css/semantic.min.css';
 
+// sprinkle our styles on top
+import './index.css';
+
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 

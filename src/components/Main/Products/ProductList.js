@@ -2,12 +2,15 @@ import React from 'react';
 import { Card } from 'semantic-ui-react';
 
 import src from 'images/elliot.jpg';
+import './styles/index.css';
+
 
 const ProductList = ({ products }) => {
   const rows = products.map(p => (
     <Card
       image={src}
       header={p.name}
+      className='shadow'
       key={p.id}
       meta={p.price.toLocaleString('en-au', {
         style: 'currency',
