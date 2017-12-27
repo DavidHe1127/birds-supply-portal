@@ -1,11 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import { Form } from 'semantic-ui-react';
+import { Form, Header, Image } from 'semantic-ui-react';
+import avatar from 'images/elliot.jpg';
+
+const Avatar = styled.div`
+  margin-bottom: 10px;
+`;
 
 export default class FormContainer extends React.Component {
   render() {
     return (
       <Form>
+        <Avatar>
+          <Image circular centered src={avatar} size="small" />
+        </Avatar>
         <Form.Group widths="equal">
           <Form.Input
             id="form-subcomponent-shorthand-input-first-name"

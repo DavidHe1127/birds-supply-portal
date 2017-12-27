@@ -8,7 +8,7 @@ import Events from 'containers/Main/Events';
 import Sidebar from 'components/Sidebar';
 
 const MainWrapper = styled.div`
-  margin: 10px 10px 10px 150px;
+  margin: 10px 10px 10px 160px;
 `;
 
 const withSidebar = C =>

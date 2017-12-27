@@ -6,13 +6,9 @@ import { Container } from 'semantic-ui-react';
 
 import Header from './Header';
 import Prods from './Products';
-// import Form from 'containers/Main/Products/Form';
 
 class Products extends Component {
-  addProduct = e => {
-    // Form
-    this.props.history.push('/products/new');
-  };
+  addProduct = e => this.props.history.push('/products/new')
 
   render() {
     const products = this.props.products.edges.map(x => ({
