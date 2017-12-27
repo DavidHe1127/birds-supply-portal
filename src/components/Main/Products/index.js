@@ -5,9 +5,8 @@ import { withRouter } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
 import Header from './Header';
-import src from 'images/elliot.jpg';
 import Prods from './Products';
-import Form from 'containers/Main/Products/Form';
+// import Form from 'containers/Main/Products/Form';
 
 class Products extends Component {
   addProduct = e => {

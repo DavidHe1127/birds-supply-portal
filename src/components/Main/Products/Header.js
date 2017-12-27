@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Header as Hdr, Button, List, Search } from 'semantic-ui-react';
 

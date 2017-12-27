@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Form, Container } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
 
 export default class FormContainer extends React.Component {
   render() {

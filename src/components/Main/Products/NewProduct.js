@@ -4,7 +4,7 @@ import { Container } from 'semantic-ui-react';
 
 import Form from 'containers/Main/Products/Form';
 
-import src from 'images/elliot.jpg';
+// import src from 'images/elliot.jpg';
 import './styles/index.css';
 
 const NewProduct = ({ products }) => (
