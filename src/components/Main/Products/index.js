@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 
-import { Header, Search, Container } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 
+import Header from './Header';
 import src from 'images/elliot.jpg';
 import ProductList from './ProductList';
 
@@ -19,9 +20,7 @@ class Products extends Component {
 
     return (
       <Container>
-        <Header>
-          <Search />
-        </Header>
+        <Header />
         <Container>
           <ProductList {...{ products }} />
         </Container>
