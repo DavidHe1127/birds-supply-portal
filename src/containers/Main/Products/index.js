@@ -1,32 +1,18 @@
 import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from 'Environment';
+import { Route, Switch } from 'react-router-dom';
 
-import Products from 'components/Main/Products';
+import ProductsContainer from 'containers/Main/Products/Products';
+import NewProduct from 'components/Main/Products/NewProduct';
 
-const productsQuery = graphql`
-  query ProductsContainerQuery {
-    products {
-      ...Products_products
-    }
-  }
-`;
-
-export default class ProductsContainer extends Component {
+export default class ProductsIndexContainer extends Component {
   render() {
     return (
-      <QueryRenderer
-        environment={environment}
-        query={productsQuery}
-        render={({ error, props }) => {
-          if (error) {
-            return <div>{error.message}</div>;
-          } else if (props) {
-            return <Products {...props} />;
-          }
-          return <div>Loading</div>;
-        }}
-      />
+      <Switch>
+        <Route exact path="/products" component={ProductsContainer} />
+        <Route path="/products/new" component={NewProduct} />
+      </Switch>
     );
   }
 }

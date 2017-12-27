@@ -4,8 +4,7 @@ import { Card } from 'semantic-ui-react';
 import src from 'images/elliot.jpg';
 import './styles/index.css';
 
-
-const ProductList = ({ products }) => {
+const Products = ({ products }) => {
   const rows = products.map(p => (
     <Card
       image={src}
@@ -23,4 +22,4 @@ const ProductList = ({ products }) => {
   return <Card.Group itemsPerRow={4}>{rows}</Card.Group>;
 };
 
-export default ProductList;
+export default Products;

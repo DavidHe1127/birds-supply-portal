@@ -19,7 +19,7 @@ const withSidebar = C =>
         <div>
           <Sidebar path={pathname} />
           <MainWrapper>
-            <C />
+            <C path={pathname} />
           </MainWrapper>
         </div>
       );
