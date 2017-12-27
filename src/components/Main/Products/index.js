@@ -10,12 +10,10 @@ import Prods from './Products';
 import Form from 'containers/Main/Products/Form';
 
 class Products extends Component {
-
-  addProduct = (e) => {
+  addProduct = e => {
     // Form
     this.props.history.push('/products/new');
-
-  }
+  };
 
   render() {
     const products = this.props.products.edges.map(x => ({
@@ -27,7 +25,7 @@ class Products extends Component {
 
     return (
       <Container>
-        <Header addProduct={this.addProduct}/>
+        <Header addProduct={this.addProduct} />
         <Container>
           <Prods {...{ products }} />
         </Container>
