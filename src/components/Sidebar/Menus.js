@@ -22,7 +22,7 @@ const menus = [
 
 class Menus extends Component {
 
-  onClick = (e, data) => this.props.history.push(data.name)
+  onClick = (e, data) => this.props.history.push(`/${data.name}`)
 
   render() {
     const { path } = this.props;
