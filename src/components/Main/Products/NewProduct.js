@@ -8,7 +8,7 @@ import Form from 'containers/Main/Products/Form';
 import './styles/index.css';
 
 const NewProduct = ({ products }) => (
-  <Container>
+  <Container text>
     <Form />
   </Container>
 );

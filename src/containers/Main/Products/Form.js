@@ -24,13 +24,13 @@ export default class FormContainer extends React.Component {
         </Avatar>
         <Form.Input
           id="form-subcomponent-shorthand-input-first-name"
-          label="price"
-          placeholder="Price"
+          label="Price"
+          placeholder="price"
         />
         <Form.Input
           id="form-subcomponent-shorthand-input-first-name"
-          label="qty"
-          placeholder="Qty"
+          label="Qty"
+          placeholder="qty"
           type="number"
           max="100"
         />
