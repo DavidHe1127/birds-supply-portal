@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Form, Header, Image } from 'semantic-ui-react';
-import avatar from 'images/elliot.jpg';
+import avatar from 'images/parrot_avatar.png';
 
 const Avatar = styled.div`
   margin-bottom: 10px;
+  background: #e6f2ff;
 `;
 
 export default class FormContainer extends React.Component {
