@@ -112,8 +112,9 @@ type Query {
   suppliers(skip: Int, after: String, before: String, first: Int, last: Int): SupplierConnection
   parrot(id: ID, code: String): Parrot
   parrots(skip: Int, after: String, before: String, first: Int, last: Int): ParrotConnection
+  parrotsToProduct(supplierId: ID): ParrotConnection
   product(id: ID!): Product
-  products(skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection
+  products(skip: Int, after: String, before: String, first: Int, last: Int, supplierId: ID): ProductConnection
   bestSellers(skip: Int, after: String, before: String, first: Int, last: Int, supplierId: ID): ProductConnection
 }
 
