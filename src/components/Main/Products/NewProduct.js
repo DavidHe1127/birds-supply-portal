@@ -10,9 +10,11 @@ import './styles/index.css';
 
 class NewProduct extends React.Component {
   render() {
+    const parrotsToProduct = this.props.parrotsToProduct;
+
     return (
       <Container text>
-        <Form />
+        <Form {...{ parrotsToProduct }} />
       </Container>
     );
   }
