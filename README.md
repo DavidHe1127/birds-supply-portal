@@ -4,6 +4,7 @@ This app aims at providing a platform for suppliers to provision/manage their pr
 
 ### TODOs
 * Add delete product mutation
+* Add edit product mutation
 * Design wireframe
 
 ### Assumptions
