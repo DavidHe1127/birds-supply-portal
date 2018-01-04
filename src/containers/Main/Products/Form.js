@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 import { Form, Image, Select, Button } from 'semantic-ui-react';
 import avatar from 'images/parrot_avatar.svg';
+
+import addProductMutation from 'mutations/addProductMutation';
 
 const Avatar = styled.div`
   margin-bottom: 10px;
@@ -13,7 +16,7 @@ const Actions = styled.div`
   text-align: center;
 `;
 
-export default class FormContainer extends React.Component {
+class FormContainer extends React.Component {
 
   state = {
     price: 0,
@@ -27,7 +30,10 @@ export default class FormContainer extends React.Component {
 
   onSubmit = () => {
     const {price, qty, parrot} = this.state;
+    addProductMutation({price, parrot, qty}, this.onAddProduct);
   }
+
+  onAddProduct = () => this.props.history.push(`/products`)
 
   render() {
     const parrots = this.props.parrotsToProduct.edges.map(p => ({
@@ -75,3 +81,5 @@ export default class FormContainer extends React.Component {
     );
   }
 }
+
+export default withRouter(FormContainer);

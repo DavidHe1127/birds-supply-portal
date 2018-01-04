@@ -15,6 +15,12 @@ input addParrotInput {
   code: String
 }
 
+input addProductInput {
+  price: Int
+  qty: Int
+  parrotCode: String
+}
+
 type Customer {
   id: ID!
   first_name: String
@@ -38,6 +44,7 @@ type Mutation {
   setCustomer(input: setCustomerInput): Customer
   delCustomer(input: delCustomerInput): Customer
   addParrot(input: addParrotInput!): Parrot
+  addProduct(input: addProductInput!): Product
 }
 
 interface Node {
