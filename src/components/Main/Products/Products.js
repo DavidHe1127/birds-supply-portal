@@ -4,7 +4,7 @@ import { Card, Image, Icon, Grid } from 'semantic-ui-react';
 import src from 'images/elliot.jpg';
 import './styles/index.css';
 
-const Products = ({ products }) => {
+const Products = ({ products, onDelete }) => {
   const rows = products.map(p => (
     <Card className="shadow" key={p.id}>
       <Image src={src} />
@@ -23,7 +23,7 @@ const Products = ({ products }) => {
             {p.supplier}
           </Grid.Column>
           <Grid.Column floated="right" width={8}>
-            <Icon className="highlight" name="recycle" />
+            <Icon className="highlight" name="recycle" onClick={onDelete} />
           </Grid.Column>
         </Grid.Row>
       </Card.Content>

@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
 import Header from './Header';
-import Prods from './Products';
+import ProductsContainer from 'containers/Main/Products/Products';
 
 class Products extends Component {
   addProduct = e => this.props.history.push('/products/new')
@@ -22,7 +22,7 @@ class Products extends Component {
       <Container>
         <Header addProduct={this.addProduct} />
         <Container>
-          <Prods {...{ products }} />
+          <ProductsContainer {...{ products }} />
         </Container>
       </Container>
     );
