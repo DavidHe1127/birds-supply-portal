@@ -1,3 +1,7 @@
+schema {
+  query: Root
+}
+
 input addCustomerInput {
   first_name: String
   last_name: String
@@ -21,6 +25,10 @@ input addProductInput {
   parrotCode: String
 }
 
+type addProductPayload {
+  product: Product
+}
+
 type Customer {
   id: ID!
   first_name: String
@@ -38,6 +46,10 @@ input delProductInput {
   id: ID!
 }
 
+type delProductPayload {
+  deletedProductId: String!
+}
+
 enum Gender {
   Female
   Male
@@ -48,8 +60,8 @@ type Mutation {
   setCustomer(input: setCustomerInput): Customer
   delCustomer(input: delCustomerInput): Customer
   addParrot(input: addParrotInput!): Parrot
-  addProduct(input: addProductInput!): Product
-  delProduct(input: delProductInput!): Product
+  addProduct(input: addProductInput!): addProductPayload
+  delProduct(input: delProductInput!): delProductPayload
 }
 
 interface Node {
@@ -117,7 +129,7 @@ type ProductEdge {
   node: Product
 }
 
-type Query {
+type Root {
   customer(email: String): Customer
   customers: [Customer]
   supplier(id: ID, code: String): Supplier

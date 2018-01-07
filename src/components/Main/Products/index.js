@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createPaginationContainer, graphql } from 'react-relay';
 import { withRouter } from 'react-router-dom';
 
 import { Container } from 'semantic-ui-react';
@@ -8,7 +8,7 @@ import Header from './Header';
 import ProductsContainer from 'containers/Main/Products/Products';
 
 class Products extends Component {
-  addProduct = e => this.props.history.push('/products/new')
+  addProduct = e => this.props.history.push('/products/new');
 
   render() {
     const products = this.props.products.edges.map(x => ({
@@ -29,24 +29,47 @@ class Products extends Component {
   }
 }
 
-export default createFragmentContainer(
+export default createPaginationContainer(
   withRouter(Products),
   graphql`
-    fragment Products_products on ProductConnection {
-      edges {
-        node {
-          id
-          price
-          parrot {
+    fragment Products on Root {
+      products(first: $count, after: $cursor)
+        @connection(key: "Products_products", filters: []) {
+        edges {
+          cursor
+          node {
             id
-            name
-            description
-          }
-          supplier {
-            name
+            price
+            parrot {
+              id
+              name
+              description
+            }
+            supplier {
+              name
+            }
           }
         }
       }
     }
-  `
+  `,
+  {
+    query: graphql`
+      query ProductsQuery($count: Int!, $cursor: String) {
+        ...Products
+      }
+    `,
+    getFragmentVariables(prevVars, totalCount) {
+      return {
+        ...prevVars,
+        count: totalCount
+      };
+    },
+    getVariables(props, { count, cursor }, fragmentVariables) {
+      return {
+        count,
+        cursor
+      };
+    }
+  }
 );

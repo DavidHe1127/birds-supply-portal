@@ -5,12 +5,17 @@ import environment from 'Environment';
 import Products from 'components/Main/Products';
 
 const productsQuery = graphql`
-  query ProductsContainerQuery {
+  query ProductsContainerQuery($count: Int!, $cursor: String) {
     products {
-      ...Products_products
+      ...Products
     }
   }
 `;
+
+const variables = {
+  count: 10,
+  cursor: null
+};
 
 export default class ProductsContainer extends Component {
   render() {
@@ -18,6 +23,10 @@ export default class ProductsContainer extends Component {
       <QueryRenderer
         environment={environment}
         query={productsQuery}
+        variables={{
+          count: 10,
+          cursor: null
+        }}
         render={({ error, props }) => {
           if (error) {
             return <div>{error.message}</div>;

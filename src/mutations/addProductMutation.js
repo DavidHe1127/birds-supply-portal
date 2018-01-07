@@ -4,7 +4,9 @@ import environment from 'Environment';
 const mutation = graphql`
   mutation addProductMutation($input: addProductInput!) {
     addProduct(input: $input) {
-      id
+      product {
+        id
+      }
     }
   }
 `;

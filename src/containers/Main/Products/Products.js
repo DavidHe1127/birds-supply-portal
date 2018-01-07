@@ -1,20 +1,24 @@
 import React from 'react';
 import { Confirm } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
 
+import delProductMutation from 'mutations/delProductMutation';
 import Products from 'components/Main/Products/Products';
 
 class ProductsContainer extends React.Component {
   state = {
-    open: false
+    open: false,
+    product: null,
+    id: null
   }
 
-  onDelete = e => this.setState({ open: true })
+  onDelete = (e, { name, id }) => this.setState({ open: true, name, id })
 
   onCancel = e => this.setState({ open: false })
 
   onConfirm = e => {
     this.setState({ open: false }, () => {
-      alert('fuck off!!');
+      delProductMutation(this.state.id, () => this.props.history.push(`/products`));
     });
   }
 
@@ -27,7 +31,7 @@ class ProductsContainer extends React.Component {
         />
         <Confirm
           open={this.state.open}
-          content={"Are you sure you want to delete this product?"}
+          content={`Are you sure you want to delete ${this.state.product}?`}
           onCancel={this.onCancel}
           onConfirm={this.onConfirm}
         />
@@ -36,4 +40,4 @@ class ProductsContainer extends React.Component {
   }
 }
 
-export default ProductsContainer;
+export default withRouter(ProductsContainer);
