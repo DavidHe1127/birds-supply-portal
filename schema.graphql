@@ -1,7 +1,3 @@
-schema {
-  query: Root
-}
-
 input addCustomerInput {
   first_name: String
   last_name: String
@@ -129,7 +125,7 @@ type ProductEdge {
   node: Product
 }
 
-type Root {
+type Query {
   customer(email: String): Customer
   customers: [Customer]
   supplier(id: ID, code: String): Supplier

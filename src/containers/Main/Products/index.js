@@ -6,9 +6,7 @@ import Products from 'components/Main/Products';
 
 const productsQuery = graphql`
   query ProductsContainerQuery($count: Int!, $cursor: String) {
-    products {
-      ...Products
-    }
+    ...Products
   }
 `;
 

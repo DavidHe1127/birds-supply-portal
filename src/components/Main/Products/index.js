@@ -32,7 +32,7 @@ class Products extends Component {
 export default createPaginationContainer(
   withRouter(Products),
   graphql`
-    fragment Products on Root {
+    fragment Products on Query {
       products(first: $count, after: $cursor)
         @connection(key: "Products_products", filters: []) {
         edges {
