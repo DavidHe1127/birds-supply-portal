@@ -136,6 +136,7 @@ type Query {
   product(id: ID!): Product
   products(skip: Int, after: String, before: String, first: Int, last: Int, supplierId: ID): ProductConnection
   bestSellers(skip: Int, after: String, before: String, first: Int, last: Int, supplierId: ID): ProductConnection
+  id: ID!
 }
 
 input setCustomerInput {

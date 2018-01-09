@@ -1,4 +1,5 @@
 import { commitMutation, graphql } from 'react-relay';
+import { ConnectionHandler } from 'relay-runtime';
 import environment from 'Environment';
 
 const mutation = graphql`
@@ -9,14 +10,14 @@ const mutation = graphql`
   }
 `;
 
-const configs = [
-  {
-    type: 'NODE_DELETE',
-    deletedIDFieldName: 'deletedProductId'
-  }
-];
+// const configs = [
+//   {
+//     type: 'NODE_DELETE',
+//     deletedIDFieldName: 'deletedProductId'
+//   }
+// ];
 
-const delProductMutation = (id, cb) => {
+const delProductMutation = (id, queryId, cb) => {
   const variables = {
     input: {
       id
@@ -30,12 +31,16 @@ const delProductMutation = (id, cb) => {
       cb && cb();
     },
     updater: store => {
-      // const payload = store.getRootField('removeTodo');
-      // sharedUpdater(store, user, payload.getValue('deletedTodoId'));
+      const deleteProductField = store.getRootField('delProduct')
+      console.log(deleteProductField)
+      // const deletedId = deleteProductField.getValue('deletedProductId')
+      // const viewerProxy = store.get(queryId)
+      // const connection = ConnectionHandler.getConnection(viewerProxy, 'Products_products')
+      // ConnectionHandler.deleteNode(connection, deletedId)
     },
-    onError: err => alert(err, 'fuck off!!!'),
-    configs
+    onError: err => console.log(err),
   });
 };
 
+    // configs
 export default delProductMutation;

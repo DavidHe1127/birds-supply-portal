@@ -18,7 +18,7 @@ class ProductsContainer extends React.Component {
 
   onConfirm = e => {
     this.setState({ open: false }, () => {
-      delProductMutation(this.state.id, () => this.props.history.push(`/products`));
+      delProductMutation(this.state.id, this.props.viewerId, () => this.props.history.push(`/products`));
     });
   }
 
