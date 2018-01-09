@@ -11,7 +11,7 @@ class Products extends Component {
   addProduct = e => this.props.history.push('/products/new');
 
   render() {
-    const products = this.props.products.edges.map(x => ({
+    const products = this.props.products.products.edges.map(x => ({
       id: x.node.id,
       price: x.node.price,
       name: x.node.parrot.name,
@@ -32,8 +32,8 @@ class Products extends Component {
 export default createPaginationContainer(
   withRouter(Products),
   graphql`
-    fragment Products on Query {
-      products(first: $count, after: $cursor)
+    fragment Products_products on Query {
+      products(first: $count)
         @connection(key: "Products_products", filters: []) {
         edges {
           cursor
@@ -55,8 +55,8 @@ export default createPaginationContainer(
   `,
   {
     query: graphql`
-      query ProductsQuery($count: Int!, $cursor: String) {
-        ...Products
+      query ProductsQuery($count: Int!) {
+        ...Products_products
       }
     `,
     getFragmentVariables(prevVars, totalCount) {
@@ -65,10 +65,9 @@ export default createPaginationContainer(
         count: totalCount
       };
     },
-    getVariables(props, { count, cursor }, fragmentVariables) {
+    getVariables(props, { count }, fragmentVariables) {
       return {
-        count,
-        cursor
+        count
       };
     }
   }
