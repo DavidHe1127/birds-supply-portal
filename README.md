@@ -3,7 +3,7 @@
 This app aims at providing a platform for suppliers to provision/manage their products.
 
 ### TODOs
-* Add delete product mutation
+* Add delete product mutation (UI not updated WIP)
 * Add validation
 * Add edit product mutation
 * Design wireframe
