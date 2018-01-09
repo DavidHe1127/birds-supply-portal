@@ -31,10 +31,10 @@ const delProductMutation = (id, queryId, cb) => {
       cb && cb();
     },
     updater: store => {
-      const deleteProductField = store.getRootField('delProduct')
-      console.log(deleteProductField)
-      // const deletedId = deleteProductField.getValue('deletedProductId')
-      // const viewerProxy = store.get(queryId)
+      const deleteProductField = store.getRootField('delProduct');
+      const deletedId = deleteProductField.getValue('deletedProductId');
+      const viewerProxy = store.get('dGhpcyBpcyBkYXZpZCBtciBoZSdzIHRlc3Q=');
+      console.log(viewerProxy);
       // const connection = ConnectionHandler.getConnection(viewerProxy, 'Products_products')
       // ConnectionHandler.deleteNode(connection, deletedId)
     },

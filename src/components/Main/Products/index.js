@@ -22,7 +22,7 @@ class Products extends Component {
       <Container>
         <Header addProduct={this.addProduct} />
         <Container>
-          <ProductsContainer {...{ products }} viewerId={this.props.products.id} />
+          <ProductsContainer {...{ products }} />
         </Container>
       </Container>
     );
@@ -33,7 +33,6 @@ export default createPaginationContainer(
   withRouter(Products),
   graphql`
     fragment Products_products on Query {
-      id
       products(first: $count)
         @connection(key: "Products_products", filters: []) {
         edges {
