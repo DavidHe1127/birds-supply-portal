@@ -33,6 +33,7 @@ export default createPaginationContainer(
   withRouter(Products),
   graphql`
     fragment Products_products on Query {
+      id
       products(first: $count)
         @connection(key: "Products_products", filters: []) {
         edges {
