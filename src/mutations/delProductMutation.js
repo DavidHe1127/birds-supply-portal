@@ -33,7 +33,7 @@ const delProductMutation = (id, queryId, cb) => {
     updater: store => {
       const deleteProductField = store.getRootField('delProduct');
       const deletedId = deleteProductField.getValue('deletedProductId');
-      const viewerProxy = store.get('dGhpcyBpcyBkYXZpZCBtciBoZSdzIHRlc3Q=');
+      const viewerProxy = store.get('client:root');
       console.log(viewerProxy);
       // const connection = ConnectionHandler.getConnection(viewerProxy, 'Products_products')
       // ConnectionHandler.deleteNode(connection, deletedId)
