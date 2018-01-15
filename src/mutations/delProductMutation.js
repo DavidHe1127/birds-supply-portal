@@ -10,13 +10,6 @@ const mutation = graphql`
   }
 `;
 
-// const configs = [
-//   {
-//     type: 'NODE_DELETE',
-//     deletedIDFieldName: 'deletedProductId'
-//   }
-// ];
-
 const delProductMutation = (id, queryId, cb) => {
   const variables = {
     input: {
@@ -33,14 +26,15 @@ const delProductMutation = (id, queryId, cb) => {
     updater: store => {
       const deleteProductField = store.getRootField('delProduct');
       const deletedId = deleteProductField.getValue('deletedProductId');
-      const viewerProxy = store.get('client:root');
-      console.log(viewerProxy);
-      // const connection = ConnectionHandler.getConnection(viewerProxy, 'Products_products')
-      // ConnectionHandler.deleteNode(connection, deletedId)
+      const rootProxy = store.get('client:root');
+      const connection = ConnectionHandler.getConnection(
+        rootProxy,
+        'Products_products'
+      );
+      ConnectionHandler.deleteNode(connection, deletedId);
     },
-    onError: err => console.log(err),
+    onError: err => console.log(err)
   });
 };
 
-    // configs
 export default delProductMutation;
