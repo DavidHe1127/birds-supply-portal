@@ -39,16 +39,9 @@ export default createPaginationContainer(
         edges {
           cursor
           node {
-            id
-            price
-            parrot {
-              id
-              name
-              description
-            }
-            supplier {
-              name
-            }
+            ...Product_product
+            ...Parrot_parrot
+            ...Supplier_supplier
           }
         }
       }
