@@ -11,8 +11,6 @@ class Products extends Component {
   addProduct = e => this.props.history.push('/products/new');
 
   render() {
-    console.log(this.props.products);
-
     const products = this.props.products.products.edges.map(x => ({
       id: x.node.id,
       price: x.node.price,
