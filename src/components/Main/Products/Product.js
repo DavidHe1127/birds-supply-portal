@@ -5,20 +5,20 @@ import { Card, Image, Icon, Grid } from 'semantic-ui-react';
 import src from 'images/elliot.jpg';
 import './styles/index.css';
 
-const Product = ({ product, parrot, supplier, onDelete }) => {
+const Product = ({ id, sku, price, parrot, supplier, onDelete }) => {
   const withProdNameOnDelete = e =>
     onDelete(e, {
-      sku: product.sku,
-      id: product.id
+      sku,
+      id
     });
 
   return (
-    <Card className="shadow" key={product.id}>
+    <Card className="shadow">
       <Image src={src} />
       <Card.Content>
-        <Card.Header>{product.sku}</Card.Header>
+        <Card.Header>{sku}</Card.Header>
         <Card.Description>
-          {product.price.toLocaleString('en-au', {
+          {price.toLocaleString('en-au', {
             style: 'currency',
             currency: 'AUD'
           })}
@@ -44,21 +44,14 @@ const Product = ({ product, parrot, supplier, onDelete }) => {
 
 // TODO separate each model out of product
 export default createFragmentContainer(Product, {
-  product: graphql`
-    fragment Product_product on Product {
-      id
-      price
-      sku
-    }
-  `,
   parrot: graphql`
-    fragment Parrot_parrot on Parrot {
+    fragment Product_parrot on Parrot {
       name
       description
     }
   `,
   supplier: graphql`
-    fragment Supplier_supplier on Supplier {
+    fragment Product_supplier on Supplier {
       name
     }
   `

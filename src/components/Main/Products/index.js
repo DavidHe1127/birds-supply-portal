@@ -8,21 +8,15 @@ import Header from './Header';
 import ProductsContainer from 'containers/Main/Products/Products';
 
 class Products extends Component {
-  addProduct = e => this.props.history.push('/products/new');
+
+  addProduct = e => this.props.history.push('/products/new')
 
   render() {
-    const products = this.props.products.products.edges.map(x => ({
-      id: x.node.id,
-      price: x.node.price,
-      name: x.node.parrot.name,
-      supplier: x.node.supplier.name
-    }));
-
     return (
       <Container>
         <Header addProduct={this.addProduct} />
         <Container>
-          <ProductsContainer {...{ products }} />
+          <ProductsContainer {...{ products: this.props.products.products }} />
         </Container>
       </Container>
     );
@@ -33,15 +27,20 @@ export default createPaginationContainer(
   withRouter(Products),
   graphql`
     fragment Products_products on Query {
-      id
       products(first: $count)
         @connection(key: "Products_products", filters: []) {
         edges {
           cursor
           node {
-            ...Product_product
-            ...Parrot_parrot
-            ...Supplier_supplier
+            id
+            price
+            sku
+            parrot {
+              ...Product_parrot
+            }
+            supplier {
+              ...Product_supplier
+            }
           }
         }
       }
