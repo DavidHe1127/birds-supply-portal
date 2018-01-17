@@ -5,10 +5,15 @@ import { Card, Image, Icon, Grid } from 'semantic-ui-react';
 import src from 'images/elliot.jpg';
 import './styles/index.css';
 
-const Product = ({ id, sku, price, parrot, supplier, onDelete }) => {
+const Product = ({ id, sku, price, parrot, supplier, onDelete, onEdit }) => {
   const withProdNameOnDelete = e =>
     onDelete(e, {
       sku,
+      id
+    });
+
+  const withProdIdOnEdit = e =>
+    onEdit(e, {
       id
     });
 
@@ -30,6 +35,11 @@ const Product = ({ id, sku, price, parrot, supplier, onDelete }) => {
             {supplier.name}
           </Grid.Column>
           <Grid.Column floated="right" width={8}>
+            <Icon
+              className="highlight"
+              name="edit"
+              onClick={withProdIdOnEdit}
+            />
             <Icon
               className="highlight"
               name="recycle"

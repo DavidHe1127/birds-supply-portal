@@ -10,11 +10,11 @@ class ProductsContainer extends React.Component {
     open: false,
     product: null,
     id: null
-  };
+  }
 
-  onDelete = (e, { id, name }) => this.setState({ open: true, id, name });
+  onDelete = (e, { id, name }) => this.setState({ open: true, id, name })
 
-  onCancel = e => this.setState({ open: false });
+  onCancel = e => this.setState({ open: false })
 
   onConfirm = e => {
     this.setState({ open: false }, () => {
@@ -22,11 +22,13 @@ class ProductsContainer extends React.Component {
         this.props.history.push(`/products`)
       );
     });
-  };
+  }
+
+  onEdit = (e, { id }) => this.props.history.push(`/products/${id}/edit`)
 
   render() {
     const rows = this.props.products.edges.map(e => (
-      <Product {...e.node} onDelete={this.onDelete} key={e.node.id} />
+      <Product {...e.node} onDelete={this.onDelete} onEdit={this.onEdit} key={e.node.id} />
     ));
 
     return (
