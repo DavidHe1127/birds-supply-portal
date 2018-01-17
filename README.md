@@ -2,6 +2,10 @@
 
 This app aims at providing a platform for suppliers to provision/manage their products.
 
+### How to run the app
+* You need clone [Birds Supply Server](https://github.com/DavidHe1127/birds-supply-server) and run it on the side.
+* After install app-level dependencies via `npm i` you also need to install [get-graphql-schema](https://github.com/graphcool/get-graphql-schema) to fetch latest schema from the server
+
 ### TODOs
 * Separate product from products in terms of UI
 * Add validation
