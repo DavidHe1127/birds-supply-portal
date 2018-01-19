@@ -8,6 +8,6 @@ export default () => (
   <Switch>
     <Route exact path="/products" component={Products} />
     <Route path="/products/new" component={NewProduct} />
-    <Route path="/products/:product_id/edit" component={NewProduct} />
+    <Route path="/products/:productId/edit" component={NewProduct} />
   </Switch>
 );
