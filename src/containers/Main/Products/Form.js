@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
-import { Form, Image, Select, Button } from 'semantic-ui-react';
+import {Form, Image, Select, Button} from 'semantic-ui-react';
 import avatar from 'images/parrot_avatar.svg';
 
 import addProductMutation from 'mutations/addProductMutation';
@@ -17,16 +17,16 @@ const Actions = styled.div`
 `;
 
 class FormContainer extends React.Component {
-
   state = {
     price: 0,
     qty: 0,
-    parrot: null
+    parrot: null,
   }
 
-  onChange = (e, {name, value}) => this.setState({
-    [name]: value
-  })
+  onChange = (e, {name, value}) =>
+    this.setState({
+      [name]: value,
+    })
 
   onSubmit = () => {
     const {price, qty, parrot} = this.state;
@@ -36,11 +36,13 @@ class FormContainer extends React.Component {
   onAddProduct = () => this.props.history.push(`/products`)
 
   render() {
-    const parrots = this.props.parrotsToProduct.edges.map(p => ({
-      key: p.node.id,
-      value: p.node.code,
-      text: p.node.code
-    }));
+    if (this.props.isNew) {
+      var parrots = this.props.parrotsToProduct.edges.map(p => ({
+        key: p.node.id,
+        value: p.node.code,
+        text: p.node.code,
+      }));
+    }
 
     return (
       <Form onSubmit={this.onSubmit}>
@@ -55,6 +57,7 @@ class FormContainer extends React.Component {
           max="999999"
           name="price"
           onChange={this.onChange}
+          defaultValue={!this.props.isNew && this.props.productToEdit.price}
         />
         <Form.Input
           id="parrot_qty"
@@ -64,15 +67,18 @@ class FormContainer extends React.Component {
           max="999"
           name="qty"
           onChange={this.onChange}
+          defaultValue={!this.props.isNew && this.props.productToEdit.qty}
         />
-        <Form.Field
-          control={Select}
-          label="Parrot"
-          options={parrots}
-          placeholder="Parrot Code"
-          name="parrot"
-          onChange={this.onChange}
-        />
+        {this.props.isNew && (
+          <Form.Field
+            control={Select}
+            label="Parrot"
+            options={parrots}
+            placeholder="Parrot Code"
+            name="parrot"
+            onChange={this.onChange}
+          />
+        )}
         <Actions>
           <Button positive>Action</Button>
           <Button negative>Cancel</Button>

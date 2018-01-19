@@ -2,18 +2,24 @@ import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from 'Environment';
 
-import NewProduct from 'components/Main/Products/NewProduct';
+import EditProduct from 'components/Main/Products/EditProduct';
 
 const query = graphql`
-  query NewProductContainerQuery {
-    parrotsToProduct {
-      ...NewProduct_parrotsToProduct
+  query EditProductContainerQuery($id: ID!) {
+    product(id: $id) {
+      ...EditProduct_productToEdit
     }
   }
 `;
 
-export default class NewProductContainer extends React.Component {
+export default class EditProductContainer extends React.Component {
+  variables = {
+    id: null,
+  }
+
   render() {
+    this.variables.id = this.props.match.params.productId;
+
     return (
       <QueryRenderer
         environment={environment}
@@ -23,7 +29,7 @@ export default class NewProductContainer extends React.Component {
           if (error) {
             return <div>{error.message}</div>;
           } else if (props) {
-            return <NewProduct {...props} />;
+            return <EditProduct productToEdit={props.product} />;
           }
           return <div>Loading</div>;
         }}

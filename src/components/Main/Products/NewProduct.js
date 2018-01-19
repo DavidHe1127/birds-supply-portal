@@ -14,7 +14,7 @@ class NewProduct extends React.Component {
 
     return (
       <Container text>
-        <Form {...{ parrotsToProduct }} />
+        <Form {...{ parrotsToProduct }} isNew />
       </Container>
     );
   }
