@@ -58,6 +58,7 @@ type Mutation {
   addParrot(input: addParrotInput!): Parrot
   addProduct(input: addProductInput!): addProductPayload
   delProduct(input: delProductInput!): delProductPayload
+  setProduct(input: setProductInput!): setProductPayload
 }
 
 interface Node {
@@ -141,6 +142,16 @@ type Query {
 input setCustomerInput {
   _id: ID!
   email: String
+}
+
+input setProductInput {
+  id: ID!
+  qty: Int
+  price: Int
+}
+
+type setProductPayload {
+  product: Product
 }
 
 enum Species {

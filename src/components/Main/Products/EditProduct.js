@@ -12,7 +12,7 @@ class EditProduct extends React.Component {
   render() {
     return (
       <Container text>
-        <Form productToEdit={this.props.productToEdit} />
+        <Form productToEdit={this.props.productToEdit} productId={this.props.productId} />
       </Container>
     );
   }

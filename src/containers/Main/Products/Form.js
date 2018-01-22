@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-import {Form, Image, Select, Button} from 'semantic-ui-react';
+import { Form, Image, Select, Button } from 'semantic-ui-react';
 import avatar from 'images/parrot_avatar.svg';
 
 import addProductMutation from 'mutations/addProductMutation';
+import setProductMutation from 'mutations/setProductMutation';
 
 const Avatar = styled.div`
   margin-bottom: 10px;
@@ -20,27 +21,36 @@ class FormContainer extends React.Component {
   state = {
     price: 0,
     qty: 0,
-    parrot: null,
+    parrot: null
   }
 
-  onChange = (e, {name, value}) =>
+  onChange = (e, { name, value }) =>
     this.setState({
-      [name]: value,
+      [name]: value
     })
 
   onSubmit = () => {
-    const {price, qty, parrot} = this.state;
-    addProductMutation({price, parrot, qty}, this.onAddProduct);
+    const { price, qty, parrot } = this.state;
+
+    if (this.props.isNew) {
+      return addProductMutation({ price, parrot, qty }, this.navigateOnAction);
+    }
+
+    setProductMutation({
+      id: this.props.productId,
+      qty,
+      price
+    }, this.navigateOnAction);
   }
 
-  onAddProduct = () => this.props.history.push(`/products`)
+  navigateOnAction = () => this.props.history.push(`/products`);
 
   render() {
     if (this.props.isNew) {
       var parrots = this.props.parrotsToProduct.edges.map(p => ({
         key: p.node.id,
         value: p.node.code,
-        text: p.node.code,
+        text: p.node.code
       }));
     }
 

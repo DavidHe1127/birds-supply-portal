@@ -29,7 +29,7 @@ export default class EditProductContainer extends React.Component {
           if (error) {
             return <div>{error.message}</div>;
           } else if (props) {
-            return <EditProduct productToEdit={props.product} />;
+            return <EditProduct productToEdit={props.product} productId={this.variables.id} />;
           }
           return <div>Loading</div>;
         }}
