@@ -7,7 +7,7 @@ This app aims at providing a platform for suppliers to provision/manage their pr
 * After install app-level dependencies via `npm i` you also need to install [get-graphql-schema](https://github.com/graphcool/get-graphql-schema) to fetch latest schema from the server.
 
 ### TODOs
-* Add auth page
+* Add auth page (build signup, signin ui)
 * Show qty on product card
 * Add optimistic update
 * Add pagination
