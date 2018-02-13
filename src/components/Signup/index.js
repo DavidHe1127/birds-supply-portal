@@ -9,9 +9,7 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-import './styles/index.css';
-
-const Login = () => (
+const Signup = () => (
   <div className="login">
     <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
@@ -28,23 +26,33 @@ const Login = () => (
             />
             <Form.Input
               fluid
-              icon="lock"
+              icon="user"
               iconPosition="left"
-              placeholder="Password"
-              type="password"
+              placeholder="E-mail address"
             />
-
+            <Form.Input
+              fluid
+              icon="user"
+              iconPosition="left"
+              placeholder="E-mail address"
+            />
+            <Form.Input
+              fluid
+              icon="user"
+              iconPosition="left"
+              placeholder="E-mail address"
+            />
             <Button color="teal" fluid size="large">
-              Login
+              Sign Up Today
             </Button>
           </Segment>
         </Form>
         <Message>
-          New to us? <Link to='/signup'>Sign Up</Link>
+          Already have an account? <Link to="/login">Log In</Link>
         </Message>
       </Grid.Column>
     </Grid>
   </div>
 );
 
-export default Login;
+export default Signup;
