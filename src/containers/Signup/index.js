@@ -20,27 +20,20 @@ const Signup = () => (
           <Segment stacked>
             <Form.Input
               fluid
-              icon="user"
-              iconPosition="left"
-              placeholder="E-mail address"
+              placeholder="abc@abc.com"
             />
             <Form.Input
               fluid
-              icon="user"
-              iconPosition="left"
-              placeholder="E-mail address"
+              type="password"
+              placeholder="Require min length 8 & lowercase letters"
             />
             <Form.Input
               fluid
-              icon="user"
-              iconPosition="left"
-              placeholder="E-mail address"
+              placeholder="First Name"
             />
             <Form.Input
               fluid
-              icon="user"
-              iconPosition="left"
-              placeholder="E-mail address"
+              placeholder="Last Name"
             />
             <Button color="teal" fluid size="large">
               Sign Up Today

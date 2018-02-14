@@ -10,13 +10,13 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import Main from 'components/Main';
-import Login from 'components/Login';
-import Signup from 'components/Signup';
+import Login from 'containers/Login';
+import Signup from 'containers/Signup';
 
 ReactDOM.render(
   <Router>
     <Switch>
-      <Route exact path="/" component={() => <Redirect to="/products" />} />
+      <Route exact path="/" component={() => <Redirect to="/login" />} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/products" component={Main.Products} />
