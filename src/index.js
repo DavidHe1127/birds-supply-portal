@@ -1,6 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Amplify from 'aws-amplify';
+import config from '../config.json';
+
+Amplify.configure({
+  Auth: {
+    ...config
+  }
+});
+
 import 'semantic-ui-css/semantic.min.css';
 
 // sprinkle our styles on top

@@ -1,25 +1,38 @@
 import React from 'react';
 import {Button, Form, Grid, Header, Message, Segment} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
+import {Auth} from 'aws-amplify';
+
+import auth from 'auth';
 
 import './styles/index.css';
 
 export default class Login extends React.Component {
-
   state = {
     username: null,
-    password: null
-  }
+    password: null,
+  };
 
   onChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   onSubmit = e => {
-    console.log(this.state.username, this.state.password);
-  }
+    const username = this.state.username.trim();
+    const password = this.state.password.trim();
+
+    Auth.signIn(username, password)
+      .then(session => {
+        const { signInUserSession } = session;
+        auth.set(signInUserSession);
+        this.props.history.push('/products');
+      })
+      .catch(err => {
+        error: err.message;
+      });
+  };
 
   render() {
     return (
@@ -30,8 +43,20 @@ export default class Login extends React.Component {
           </Header>
           <Form size="large" onSubmit={this.onSubmit}>
             <Segment stacked>
-              <Form.Input fluid name="username" label="Username" placeholder="abc@abc.com" onChange={this.onChange} />
-              <Form.Input fluid name="password" label="Password" type="password" onChange={this.onChange} />
+              <Form.Input
+                fluid
+                name="username"
+                label="Username"
+                placeholder="abc@abc.com"
+                onChange={this.onChange}
+              />
+              <Form.Input
+                fluid
+                name="password"
+                label="Password"
+                type="password"
+                onChange={this.onChange}
+              />
               <Button color="yellow" fluid size="large">
                 Login
               </Button>
