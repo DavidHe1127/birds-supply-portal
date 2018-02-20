@@ -12,13 +12,13 @@ export default class Login extends React.Component {
   }
 
   onChange = e => {
-    this.setState = {
+    this.setState({
       [e.target.name]: e.target.value
-    };
+    })
   }
 
   onSubmit = e => {
-
+    console.log(this.state.username, this.state.password);
   }
 
   render() {
