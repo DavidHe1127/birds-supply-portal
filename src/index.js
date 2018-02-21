@@ -2,14 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Amplify from 'aws-amplify';
-import config from '../config.json';
-
-Amplify.configure({
-  Auth: {
-    ...config
-  }
-});
-
+import config from './config.json';
 import 'semantic-ui-css/semantic.min.css';
 
 // sprinkle our styles on top
@@ -22,15 +15,21 @@ import Main from 'components/Main';
 import Login from 'containers/Login';
 import Signup from 'containers/Signup';
 
+Amplify.configure({
+  Auth: {
+    ...config
+  }
+});
+
 ReactDOM.render(
   <Router>
     <Switch>
-      <Route exact path="/" component={() => <Redirect to="/login" />} />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} />
-      <Route path="/products" component={Main.Products} />
-      <Route path="/events" component={Main.Events} />
-      <Route path="/requests" component={Main.Requests} />
+      <Route exact path='/' component={() => <Redirect to='/login' />} />
+      <Route path='/login' component={Login} />
+      <Route path='/signup' component={Signup} />
+      <Route path='/products' component={Main.Products} />
+      <Route path='/events' component={Main.Events} />
+      <Route path='/requests' component={Main.Requests} />
     </Switch>
   </Router>,
   document.getElementById('root')
