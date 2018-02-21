@@ -104,5 +104,10 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "semistandard": {
+    "globals": [
+      "localStorage"
+    ]
   }
 }
