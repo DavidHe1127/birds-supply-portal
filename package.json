@@ -107,7 +107,8 @@
   },
   "semistandard": {
     "globals": [
-      "localStorage"
+      "localStorage",
+      "fetch"
     ]
   }
 }
