@@ -7,8 +7,8 @@ import EditProduct from 'containers/Main/Products/EditProduct';
 
 export default () => (
   <Switch>
-    <Route exact path="/products" component={Products} />
-    <Route path="/products/new" component={NewProduct} />
-    <Route path="/products/:productId/edit" component={EditProduct} />
+    <Route exact path='/products' component={Products} />
+    <Route path='/products/new' component={NewProduct} />
+    <Route path='/products/:productId/edit' component={EditProduct} />
   </Switch>
 );

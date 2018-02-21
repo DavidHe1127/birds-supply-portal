@@ -5,12 +5,24 @@ const set = currLoginSession => {
   cache = null;
 };
 
+const keys = [
+  'accessToken',
+  'idToken',
+  'refreshToken'
+];
+
 let cache = null;
 
 const auth = {
-  get: key => {
+  get: k => {
     if (!cache) {
       cache = get();
+    }
+
+    const key = keys.find(x => x === k);
+
+    if (!key) {
+      throw new Error(`key needs to be one of ${keys.join(',')}`);
     }
 
     return cache[key];
@@ -18,7 +30,7 @@ const auth = {
 
   set: session => set(session),
 
-  purge: () => set('AUTH', ''),
+  purge: () => set('AUTH', '')
 };
 
 export default auth;
