@@ -5,7 +5,7 @@ const set = currLoginSession => {
   cache = null;
 };
 
-const cache = null;
+let cache = null;
 
 const auth = {
   get: key => {
