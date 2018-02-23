@@ -1,3 +1,7 @@
+directive @isAuthenticated on QUERY | FIELD
+
+directive @hasScope(scope: [String]) on QUERY | FIELD
+
 input addCustomerInput {
   first_name: String
   last_name: String
@@ -25,6 +29,7 @@ type addProductPayload {
   product: Product
 }
 
+# Customer
 type Customer {
   id: ID!
   first_name: String
@@ -46,16 +51,18 @@ type delProductPayload {
   deletedProductId: String!
 }
 
+# Common
 enum Gender {
   Female
   Male
 }
 
+# Mutation
 type Mutation {
+  addParrot(input: addParrotInput!): Parrot
   addCustomer(input: addCustomerInput): Customer
   setCustomer(input: setCustomerInput): Customer
   delCustomer(input: delCustomerInput): Customer
-  addParrot(input: addParrotInput!): Parrot
   addProduct(input: addProductInput!): addProductPayload
   delProduct(input: delProductInput!): delProductPayload
   setProduct(input: setProductInput!): setProductPayload
@@ -79,6 +86,7 @@ type PageInfo {
   endCursor: String
 }
 
+# Parrot
 type Parrot implements Node {
   id: ID!
   name: String
@@ -104,6 +112,7 @@ type ParrotEdge {
   node: Parrot
 }
 
+# Product
 type Product implements Node {
   id: ID!
   sku: String
@@ -126,17 +135,18 @@ type ProductEdge {
   node: Product
 }
 
+# Query
 type Query {
   customer(email: String): Customer
   customers: [Customer]
-  supplier(id: ID, code: String): Supplier
-  suppliers(skip: Int, after: String, before: String, first: Int, last: Int): SupplierConnection
   parrot(id: ID, code: String): Parrot
   parrots(skip: Int, after: String, before: String, first: Int, last: Int): ParrotConnection
   parrotsToProduct(supplierId: ID): ParrotConnection
   product(id: ID!): Product
   products(skip: Int, after: String, before: String, first: Int, last: Int, supplierId: ID): ProductConnection
   bestSellers(skip: Int, after: String, before: String, first: Int, last: Int, supplierId: ID): ProductConnection
+  supplier(id: ID, code: String): Supplier
+  suppliers(skip: Int, after: String, before: String, first: Int, last: Int): SupplierConnection
   viewer: User
 }
 
@@ -162,6 +172,7 @@ enum Species {
   amazons
 }
 
+# Supplier
 type Supplier implements Node {
   id: ID!
   name: String
@@ -193,6 +204,7 @@ type SupplierParrotsEdge {
   node: Parrot
 }
 
+# User
 type User implements Node {
   id: ID!
   products(skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection
