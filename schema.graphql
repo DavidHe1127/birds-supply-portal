@@ -137,6 +137,7 @@ type Query {
   product(id: ID!): Product
   products(skip: Int, after: String, before: String, first: Int, last: Int, supplierId: ID): ProductConnection
   bestSellers(skip: Int, after: String, before: String, first: Int, last: Int, supplierId: ID): ProductConnection
+  viewer: User
 }
 
 input setCustomerInput {
@@ -190,5 +191,10 @@ type SupplierParrotsConnection {
 type SupplierParrotsEdge {
   cursor: String
   node: Parrot
+}
+
+type User implements Node {
+  id: ID!
+  products(skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection
 }
 

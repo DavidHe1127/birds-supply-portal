@@ -16,7 +16,7 @@ class Products extends Component {
       <Container>
         <Header addProduct={this.addProduct} />
         <Container>
-          <ProductsContainer {...{ products: this.props.products.products }} />
+          <ProductsContainer {...{ products: this.props.viewer.products }} />
         </Container>
       </Container>
     );
@@ -26,8 +26,8 @@ class Products extends Component {
 export default createPaginationContainer(
   withRouter(Products),
   graphql`
-    fragment Products_products on Query {
-      products(first: $count)
+    fragment Products_viewer on User {
+      products(first: 100)
         @connection(key: "Products_products", filters: []) {
         edges {
           cursor
@@ -48,8 +48,10 @@ export default createPaginationContainer(
   `,
   {
     query: graphql`
-      query ProductsQuery($count: Int!) {
-        ...Products_products
+      query ProductsQuery {
+        viewer {
+          ...Products_viewer
+        }
       }
     `,
     getFragmentVariables(prevVars, totalCount) {
