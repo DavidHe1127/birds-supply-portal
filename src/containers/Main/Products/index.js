@@ -19,6 +19,7 @@ export default class ProductsContainer extends Component {
         environment={environment}
         query={productsQuery}
         render={({ error, props }) => {
+          console.log(props, error);
           if (error) {
             return <div>{error.message}</div>;
           } else if (props) {

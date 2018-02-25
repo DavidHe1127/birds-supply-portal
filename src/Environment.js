@@ -21,8 +21,16 @@ const network = Network.create((operation, variables) => {
       query: operation.text,
       variables
     })
-  }).then(res => {
-    return res.json();
+  }).then(res => res.json()).then(json => {
+    // console.log(json);
+    if (json.errors) {
+      return {
+        data: [12],
+        errors: json.errors
+      };
+    }
+
+    return json;
   });
 });
 
