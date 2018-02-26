@@ -6,6 +6,10 @@ import Products from 'components/Main/Products';
 
 const productsQuery = graphql`
   query ProductsContainerQuery {
+    errors {
+      message
+      path
+    }
     viewer {
       ...Products_viewer
     }

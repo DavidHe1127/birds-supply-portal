@@ -25,8 +25,12 @@ const network = Network.create((operation, variables) => {
     // console.log(json);
     if (json.errors) {
       return {
-        data: [12],
-        errors: json.errors
+        data: {
+          viewer: null,
+          errors: {
+            message: json.errors[0].message
+          }
+        }
       };
     }
 
