@@ -1,3 +1,4 @@
+# Common
 directive @isAuthenticated on QUERY | FIELD
 
 directive @hasScope(scope: [String]) on QUERY | FIELD
@@ -51,7 +52,17 @@ type delProductPayload {
   deletedProductId: String!
 }
 
-# Common
+# Errors for relay to read server errors
+type Error {
+  id: ID
+  message: String
+  data: ErrorData
+}
+
+type ErrorData {
+  type: String
+}
+
 enum Gender {
   Female
   Male
@@ -148,6 +159,7 @@ type Query {
   supplier(id: ID, code: String): Supplier
   suppliers(skip: Int, after: String, before: String, first: Int, last: Int): SupplierConnection
   viewer: User
+  errors: [Error]
 }
 
 input setCustomerInput {

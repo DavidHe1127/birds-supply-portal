@@ -1,9 +1,4 @@
-import {
-  Environment,
-  Network,
-  RecordSource,
-  Store
-} from 'relay-runtime';
+import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 
 import auth from './auth';
 
@@ -15,23 +10,21 @@ const network = Network.create((operation, variables) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth.get('accessToken').jwtToken}`
+      Authorization: `Bearer ${auth.get('accessToken').jwtToken}`
     },
     body: JSON.stringify({
       query: operation.text,
       variables
     })
-  }).then(res => res.json()).then(json => {
-    // console.log(json);
-    if (json.errors) {
-      return {
-        data: [12],
-        errors: json.errors
-      };
-    }
+  })
+    .then(res => res.json())
+    .then(json => {
+      if (json.errors) {
+        json.data = Object.assign({}, json.data, { errors: json.errors });
+      }
 
-    return json;
-  });
+      return json;
+    });
 });
 
 const environment = new Environment({
