@@ -52,11 +52,23 @@ type delProductPayload {
   deletedProductId: String!
 }
 
+<<<<<<< HEAD
 # Errors
 type Error {
   message: String
   locations: [String]
   path: [String]
+=======
+# Errors for relay to read server errors
+type Error {
+  id: ID
+  message: String
+  data: ErrorData
+}
+
+type ErrorData {
+  type: String
+>>>>>>> 36e6b8951f45e5c15074925a4c8107c65d4a7f5d
 }
 
 enum Gender {
@@ -155,7 +167,11 @@ type Query {
   supplier(id: ID, code: String): Supplier
   suppliers(skip: Int, after: String, before: String, first: Int, last: Int): SupplierConnection
   viewer: User
+<<<<<<< HEAD
   errors: Error
+=======
+  errors: [Error]
+>>>>>>> 36e6b8951f45e5c15074925a4c8107c65d4a7f5d
 }
 
 input setCustomerInput {
