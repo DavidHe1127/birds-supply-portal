@@ -19,6 +19,15 @@ const productsQuery = graphql`
   }
 `;
 
+const render = ({error, props}) => {
+  if (error) {
+    return <div>{error.message}</div>;
+  } else if (props && props.viewer) {
+    return <Products viewer={props.viewer} />;
+  }
+  return <div>Loading</div>;
+};
+
 export default class ProductsContainer extends Component {
 
   render () {
@@ -26,14 +35,7 @@ export default class ProductsContainer extends Component {
       <QueryRenderer
         environment={environment}
         query={productsQuery}
-        render={({ error, props }) => {
-          if (error) {
-            return <div>{error.message}</div>;
-          } else if (props.viewer) {
-            return <Products products={props} />;
-          }
-          return <div>Loading</div>;
-        }}
+        render={render}
       />
     );
   }
