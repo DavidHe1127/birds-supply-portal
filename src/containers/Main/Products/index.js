@@ -6,10 +6,6 @@ import Products from 'components/Main/Products';
 
 const productsQuery = graphql`
   query ProductsContainerQuery {
-    errors {
-      message
-      path
-    }
     viewer {
       ...Products_viewer
     }
@@ -25,25 +21,15 @@ const productsQuery = graphql`
 
 export default class ProductsContainer extends Component {
 
-  onAuthFail () {
-    this.props.history.push('/login');
-  }
-
   render () {
     return (
       <QueryRenderer
         environment={environment}
         query={productsQuery}
         render={({ error, props }) => {
-          if (props && props.errors[0].data.type === 'AUTH') {
-            this.onAuthFail();
-            return null;
-          }
-
           if (error) {
             return <div>{error.message}</div>;
-          } else if (props) {
-            console.log('xxxx');
+          } else if (props.viewer) {
             return <Products products={props} />;
           }
           return <div>Loading</div>;
