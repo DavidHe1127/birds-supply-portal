@@ -2,7 +2,7 @@ import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Card, Image, Icon, Grid } from 'semantic-ui-react';
 
-import src from 'images/elliot.jpg';
+import avatar from 'images/elliot.jpg';
 import './styles/index.css';
 
 const Product = ({ id, sku, price, parrot, supplier, onDelete, onEdit }) => {
@@ -19,7 +19,7 @@ const Product = ({ id, sku, price, parrot, supplier, onDelete, onEdit }) => {
 
   return (
     <Card className="shadow">
-      <Image src={src} />
+      <Image src={avatar} />
       <Card.Content>
         <Card.Header>{sku}</Card.Header>
         <Card.Description>
