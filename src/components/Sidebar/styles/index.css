@@ -1,3 +1,8 @@
 .sidebar {
   background: var(--mystic) !important;
 }
+
+.profile:hover {
+  color: var(--amber);
+  cursor: pointer;
+}
