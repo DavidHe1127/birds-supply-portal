@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "autoprefixer": "7.1.2",
-    "aws-amplify": "^0.2.7",
+    "aws-amplify": "^0.2.10",
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
