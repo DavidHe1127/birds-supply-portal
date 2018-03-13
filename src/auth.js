@@ -30,7 +30,9 @@ const auth = {
 
   set: session => set(session),
 
-  purge: () => set('AUTH', '')
+  purge: () => set(''),
+
+  hasAuth: () => get('AUTH') !== ''
 };
 
 export default auth;
