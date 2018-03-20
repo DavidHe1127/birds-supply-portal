@@ -2,6 +2,19 @@
 
 This app aims at providing a platform for suppliers to provision/manage their products.
 
+### What does this app do?
+Basically, every supplier in our system will be allocated an account to login to portal. At the moment, portal allows suppliers to manage their products - create, update, view, delete operations. Product is created based on a bird model that defines intrinsic values such as lifespan, weight, length, distributions etc.
+
+We will keep committing to this app to embrace more features.
+
+It is an ongoing project.
+
+### Why we build it?
+I want to learn new techs (relay, graphql, aws, docker etc) by not just reading posts/writing experimental code them but building something that leverages them. That way I will gain hands-on experiences with them and a clear understanding and memory of how they work. More importantly, it serves as a manual I can always refer to for a quick reference when I forget how I use them.
+
+### About the contributors
+All contributors in this project have full-time jobs and try to squeeze spare time daily to make as much contribution as they can to make this app better.
+
 ### Install Dependencies
 * You need clone [Birds Supply Server](https://github.com/DavidHe1127/birds-supply-server) and run it in the terminal.
 * After install app-level dependencies via `npm i` you also need to install [get-graphql-schema](https://github.com/graphcool/get-graphql-schema) globally to fetch latest schema from the server.
@@ -13,7 +26,7 @@ Before run scripts below, make sure you have `Birds Supply Server` running in th
 * Run `npm start` to start the app.
 
 Two things you need to be mindful about:
-* No need to run `npm run get:schema` if there is no change in `graphql` schema in the backend. 
+* No need to run `npm run get:schema` if there is no change in `graphql` schema in the backend.
 * No need to run `npm run relay` if there is no change in `graphql` queries/mutations. i.e
 
 ```js
