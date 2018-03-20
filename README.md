@@ -55,6 +55,9 @@ const productsQuery = graphql`
 * Add validation
 * Design wireframe
 
+### Investigation
+* What is the idiomatic way to overwrite semantic-ui built-in sttyles without using !important?
+
 ### Assumptions
 * Suppliers can only see their own products
 * Each parrot species can only have one product linked to it under each supplier
