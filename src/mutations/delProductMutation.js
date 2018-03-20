@@ -10,7 +10,7 @@ const mutation = graphql`
   }
 `;
 
-const delProductMutation = (id, queryId, cb) => {
+const delProductMutation = (id, viewerId, cb) => {
   const variables = {
     input: {
       id
@@ -26,9 +26,9 @@ const delProductMutation = (id, queryId, cb) => {
     updater: store => {
       const deleteProductField = store.getRootField('delProduct');
       const deletedId = deleteProductField.getValue('deletedProductId');
-      const rootProxy = store.get('client:root');
+      const userProxy = store.get(viewerId);
       const connection = ConnectionHandler.getConnection(
-        rootProxy,
+        userProxy,
         'Products_products'
       );
       ConnectionHandler.deleteNode(connection, deletedId);

@@ -12,11 +12,16 @@ class Products extends Component {
   addProduct = e => this.props.history.push('/products/new')
 
   render() {
+    const productsProps = {
+      products: this.props.viewer.products,
+      viewerId: this.props.viewer.id
+    };
+
     return (
       <Container>
         <Header addProduct={this.addProduct} />
         <Container>
-          <ProductsContainer {...{ products: this.props.viewer.products }} />
+          <ProductsContainer {...productsProps} />
         </Container>
       </Container>
     );
@@ -27,6 +32,7 @@ export default createPaginationContainer(
   withRouter(Products),
   graphql`
     fragment Products_viewer on User {
+      id
       products(first: 100)
         @connection(key: "Products_products", filters: []) {
         edges {
