@@ -13,7 +13,7 @@ It is an ongoing project.
 When new techs come out, I always want to learn them (relay, graphql, aws, docker etc) by not just reading posts/writing experimental code them but building something that leverages them. That way I will gain hands-on experiences with them and a clear understanding and memory of how they work. More importantly, it serves as a manual I can always refer to for a quick reference when I forget how I use them.
 
 ### About the contributors
-All contributors in this project have full-time jobs and try to squeeze spare time daily to make as much contribution as they can to make this app better.
+All contributors in this project have full-time jobs and try to squeeze time out of their spare time to make as much contribution as they can to make this app better.
 
 ### Install Dependencies
 * You need clone [Birds Supply Server](https://github.com/DavidHe1127/birds-supply-server) and run it in the terminal.
