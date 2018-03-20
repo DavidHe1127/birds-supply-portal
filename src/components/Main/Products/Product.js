@@ -21,7 +21,7 @@ const Product = ({ id, sku, price, parrot, supplier, onDelete, onEdit }) => {
     <Card className="shadow">
       <Image src={avatar} />
       <Card.Content>
-        <Card.Header>{sku}</Card.Header>
+        <Card.Header className="sku">{sku}</Card.Header>
         <Card.Description>
           {price.toLocaleString('en-au', {
             style: 'currency',
