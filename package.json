@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "autoprefixer": "7.1.2",
-    "aws-amplify": "^0.2.10",
+    "aws-amplify": "^0.2.11",
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -39,7 +39,7 @@
     "react-slick": "0.15.4",
     "relay-runtime": "^1.5.0",
     "semantic-ui-css": "^2.3.1",
-    "semantic-ui-react": "^0.77.2",
+    "semantic-ui-react": "^0.79.0",
     "style-loader": "0.18.2",
     "styled-components": "^2.2.4",
     "sw-precache-webpack-plugin": "0.11.4",

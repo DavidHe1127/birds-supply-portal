@@ -32,7 +32,7 @@ class ProductsContainer extends React.Component {
     ));
 
     return (
-      <div>
+      <React.Fragment>
         <Card.Group itemsPerRow={4}>{rows}</Card.Group>
         <Confirm
           open={this.state.open}
@@ -40,7 +40,7 @@ class ProductsContainer extends React.Component {
           onCancel={this.onCancel}
           onConfirm={this.onConfirm}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
