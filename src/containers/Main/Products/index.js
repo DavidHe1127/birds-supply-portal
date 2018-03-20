@@ -28,7 +28,7 @@ const render = ({error, props}) => {
   return <div>Loading</div>;
 };
 
-export default class ProductsContainer extends Component {
+export default class ProductsIndexContainer extends Component {
 
   render () {
     return (

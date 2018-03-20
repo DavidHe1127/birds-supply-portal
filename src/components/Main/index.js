@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Requests from 'containers/Main/Requests';
-import Products from 'components/Main/Products/routes';
+import Products from 'components/Main/Products/Routes';
 import Events from 'containers/Main/Events';
 
 import Sidebar from 'components/Sidebar';
