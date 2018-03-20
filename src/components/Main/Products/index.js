@@ -34,6 +34,7 @@ export default createPaginationContainer(
           node {
             id
             price
+            qty
             sku
             parrot {
               ...Product_parrot

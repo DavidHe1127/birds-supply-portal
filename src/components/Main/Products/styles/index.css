@@ -10,3 +10,9 @@
 .sku {
   font-size: 15px !important;
 }
+
+.qty {
+  color: var(--firebrick) !important;
+  font-family: 'copse';
+  font-weight: 700;
+}
