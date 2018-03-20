@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import Amplify from 'aws-amplify';
 import config from './config.json';
-import 'semantic-ui-css/semantic.min.css';
 
 // sprinkle our styles on top
 import './index.css';
