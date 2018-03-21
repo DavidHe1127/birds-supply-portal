@@ -1,5 +1,14 @@
 import React from 'react';
-import {Button, Form, Grid, Header, Message, Segment} from 'semantic-ui-react';
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+  Dimmer,
+  Loader,
+} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import {Auth} from 'aws-amplify';
 
@@ -11,31 +20,41 @@ export default class Login extends React.Component {
   state = {
     username: null,
     password: null,
-  };
+    signingIn: false,
+  }
 
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
     });
-  };
+  }
 
   onSubmit = e => {
     const username = this.state.username.trim();
     const password = this.state.password.trim();
 
+    this.setState({
+      signingIn: true,
+    });
+
     Auth.signIn(username, password)
       .then(session => {
-        const { signInUserSession } = session;
+        const {signInUserSession} = session;
         auth.set(signInUserSession);
         this.props.history.push('/products');
       })
       .catch(err => {
-        error: err.message;
+        this.setState({
+          signingIn: false,
+        });
+        return {
+          error: err.message,
+        };
       });
-  };
+  }
 
   render() {
-    return (
+    const main = (
       <Grid centered verticalAlign="middle" columns={4} className="login">
         <Grid.Column>
           <Header as="h2" textAlign="center">
@@ -49,6 +68,7 @@ export default class Login extends React.Component {
                 label="Username"
                 placeholder="abc@abc.com"
                 onChange={this.onChange}
+                defaultValue={this.state.username}
               />
               <Form.Input
                 fluid
@@ -56,6 +76,7 @@ export default class Login extends React.Component {
                 label="Password"
                 type="password"
                 onChange={this.onChange}
+                defaultValue={this.state.password}
               />
               <Button color="yellow" fluid size="large">
                 Login
@@ -68,5 +89,18 @@ export default class Login extends React.Component {
         </Grid.Column>
       </Grid>
     );
+
+    if (this.state.signingIn) {
+      return (
+        <React.Fragment>
+          <Dimmer active>
+            <Loader>Please wait...</Loader>
+          </Dimmer>
+          {main}
+        </React.Fragment>
+      );
+    }
+
+    return main;
   }
 }
