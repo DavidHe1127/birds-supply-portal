@@ -12,6 +12,7 @@ import Header from 'components/Main/Products/Header';
 const productsQuery = graphql`
   query ProductsContainerQuery {
     viewer {
+      id
       ...Products_viewer
     }
     errors {
@@ -61,7 +62,7 @@ class ProductsContainer extends React.Component {
 
   onConfirm = e => {
     this.setState({ open: false }, () => {
-      delProductMutation(this.state.id, this.props.viewerId, () =>
+      delProductMutation(this.state.id, this.props.viewer.id, () =>
         this.props.history.push(`/products`)
       );
     });

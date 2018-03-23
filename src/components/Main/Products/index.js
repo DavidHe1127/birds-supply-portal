@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { createPaginationContainer, graphql } from 'react-relay';
-import { withRouter } from 'react-router-dom';
 import { Card } from 'semantic-ui-react';
 
 import Product from 'components/Main/Products/Product';
@@ -10,7 +9,6 @@ class Products extends Component {
     const rows = this.props.viewer.products.edges.map(e => (
       <Product
         {...e.node}
-        viewerId={this.props.id}
         onDelete={this.props.onDelete}
         onEdit={this.props.onEdit}
         key={e.node.id}
@@ -22,10 +20,9 @@ class Products extends Component {
 }
 
 export default createPaginationContainer(
-  withRouter(Products),
+  Products,
   graphql`
     fragment Products_viewer on User {
-      id
       products(first: 100) @connection(key: "Products_products", filters: []) {
         edges {
           cursor

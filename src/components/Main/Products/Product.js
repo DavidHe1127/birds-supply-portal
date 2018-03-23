@@ -5,16 +5,16 @@ import { Card, Image, Icon, Grid } from 'semantic-ui-react';
 import avatar from 'images/elliot.jpg';
 import './styles/index.css';
 
-const Product = ({ viewerId, sku, price, qty, supplier, onDelete, onEdit }) => {
+const Product = ({ id, sku, price, qty, supplier, onDelete, onEdit }) => {
   const withProdNameOnDelete = e =>
     onDelete(e, {
       sku,
-      viewerId
+      id
     });
 
   const withProdIdOnEdit = e =>
     onEdit(e, {
-      viewerId
+      id
     });
 
   return (
