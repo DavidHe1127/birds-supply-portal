@@ -105,9 +105,8 @@
     "extends": "react-app"
   },
   "semistandard": {
-    "globals": [
-      "localStorage",
-      "fetch"
-    ]
+    "env": {
+      "browser": true
+    }
   }
 }

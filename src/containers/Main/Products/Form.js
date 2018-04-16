@@ -3,24 +3,24 @@ import styled from 'styled-components';
 import {withRouter} from 'react-router-dom';
 
 import {Form, Image, Select, Button} from 'semantic-ui-react';
-import avatar from 'images/parrot_avatar.svg';
+import avatar from 'images/parrot_avatar.jpg';
 
 import addProductMutation from 'mutations/addProductMutation';
 import setProductMutation from 'mutations/setProductMutation';
 
-import ImageUploader from 'helpers/ImageUploader';
-
-const AvatarHolder = styled.div`
-  margin-bottom: 10px;
-  background: var(--cornflower-blue);
-  text-align: center;
-`;
+import ImageUploader from 'helpers/withUpload';
 
 const CenteredAvatar = styled(Image)`
-  width: 250px;
-  height: 250px;
   user-select: none;
   display: initial !important;
+  margin: 50px 0;
+  transition: .5s ease;
+  backface-visibility: hidden;
+
+  &:hover {
+    opacity: 0.3;
+    cursor: pointer;
+  }
 `;
 
 const Actions = styled.div`
@@ -75,10 +75,8 @@ class FormContainer extends React.Component {
     }
 
     return (
-      <Form onSubmit={this.onSubmit}>
-        <AvatarHolder>
-          <ImageUploader render={this.renderImageUploader} />
-        </AvatarHolder>
+      <Form onSubdmit={this.onSubmit}>
+        <ImageUploader render={this.renderImageUploader} />
         <Form.Input
           id="parrot_price"
           label="Price"
