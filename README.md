@@ -10,7 +10,7 @@ We will keep committing to this app to embrace more features.
 It is an ongoing project.
 
 ### Why we build it?
-When new techs come out, I always want to learn them (relay, graphql, aws, docker etc) by not just reading posts/writing experimental code them but building something that leverages them. That way I will gain hands-on experiences with them and a clear understanding and memory of how they work. More importantly, it serves as a manual I can always refer to for a quick reference when I forget how I use them.
+When new techs emerge, I always want to learn them (relay, graphql, aws, docker etc) by not just reading posts/writing experimental code but building something that leverages them. That way I will gain hands-on experiences with them and a clear understanding and memory of how they work. More importantly, it serves as a manual I can always refer to for a quick reference when I forget how I use them.
 
 ### About the contributors
 All contributors in this project have full-time jobs and try to squeeze time out of their spare time to make as much contribution as they can to make this app better.
