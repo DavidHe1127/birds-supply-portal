@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {withRouter} from 'react-router-dom';
 
-import {Form, Image, Select, Button} from 'semantic-ui-react';
+import {Form, Select, Button} from 'semantic-ui-react';
 import avatar from 'images/parrot_avatar.svg';
 
 import addProductMutation from 'mutations/addProductMutation';
@@ -12,7 +12,14 @@ import ImageUploader from 'helpers/ImageUploader';
 
 const AvatarHolder = styled.div`
   margin-bottom: 10px;
-  background: #f2f3f4;
+  background: var(--cornflower-blue);
+  text-align: center;
+`;
+
+const Avatar = styled.img`
+  width: 250px;
+  height: 250px;
+  user-select: none;
 `;
 
 const Actions = styled.div`
@@ -54,7 +61,7 @@ class FormContainer extends React.Component {
   }
 
   renderImageUploader() {
-    return <Image circular centered src={avatar} size="small" />;
+    return <Avatar src={avatar} />;
   }
 
   render() {
