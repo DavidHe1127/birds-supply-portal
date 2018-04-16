@@ -1,14 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
-import { Form, Image, Select, Button } from 'semantic-ui-react';
+import {Form, Image, Select, Button} from 'semantic-ui-react';
 import avatar from 'images/parrot_avatar.svg';
 
 import addProductMutation from 'mutations/addProductMutation';
 import setProductMutation from 'mutations/setProductMutation';
 
-const Avatar = styled.div`
+import ImageUploader from 'helpers/ImageUploader';
+
+const AvatarHolder = styled.div`
   margin-bottom: 10px;
   background: #f2f3f4;
 `;
@@ -21,44 +23,54 @@ class FormContainer extends React.Component {
   state = {
     price: 0,
     qty: 0,
-    parrot: null
-  }
+    parrot: null,
+  };
 
-  onChange = (e, { name, value }) =>
+  onChange(e, {name, value}) {
     this.setState({
-      [name]: value
-    })
+      [name]: value,
+    });
+  }
 
   onSubmit = () => {
-    const { price, qty, parrot } = this.state;
+    const {price, qty, parrot} = this.state;
 
     if (this.props.isNew) {
-      return addProductMutation({ price, parrot, qty }, this.navigateOnAction);
+      return addProductMutation({price, parrot, qty}, this.navigateOnAction);
     }
 
-    setProductMutation({
-      id: this.props.productId,
-      qty,
-      price
-    }, this.navigateOnAction);
+    setProductMutation(
+      {
+        id: this.props.productId,
+        qty,
+        price,
+      },
+      this.navigateOnAction,
+    );
+  };
+
+  navigateOnAction() {
+    this.props.history.push(`/products`);
   }
 
-  navigateOnAction = () => this.props.history.push(`/products`);
+  renderImageUploader() {
+    return <Image circular centered src={avatar} size="small" />;
+  }
 
   render() {
     if (this.props.isNew) {
       var parrots = this.props.parrotsToProduct.edges.map(p => ({
         key: p.node.id,
         value: p.node.code,
-        text: p.node.code
+        text: p.node.code,
       }));
     }
 
     return (
       <Form onSubmit={this.onSubmit}>
-        <Avatar>
-          <Image circular centered src={avatar} size="small" />
-        </Avatar>
+        <AvatarHolder>
+          <ImageUploader render={this.renderImageUploader} />
+        </AvatarHolder>
         <Form.Input
           id="parrot_price"
           label="Price"
