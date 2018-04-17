@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Image } from 'semantic-ui-react';
 
 const ImageHolder = styled.div`
   margin-bottom: 10px;
@@ -10,6 +10,19 @@ const ImageHolder = styled.div`
 
 const HideFileInput = styled.input`
   display: none;
+`;
+
+const CenteredAvatar = styled(Image)`
+  user-select: none;
+  display: initial !important;
+  margin: 50px 0;
+  transition: .5s ease;
+  backface-visibility: hidden;
+
+  &:hover {
+    opacity: 0.3;
+    cursor: pointer;
+  }
 `;
 
 const Add = styled.div`
@@ -22,10 +35,9 @@ const Add = styled.div`
   -ms-transform: translate(-50%, -50%);
   text-align: center;
 
-  &:hover {
+  ${CenteredAvatar}:hover & {
     opacity: 1;
   }
-
 `;
 
 export default class ImageUploader extends React.Component {
@@ -70,7 +82,7 @@ export default class ImageUploader extends React.Component {
     return (
       <ImageHolder>
         <label>
-          {this.props.render(this.state)}
+          <CenteredAvatar {...this.props} />
           <Add>
             <Icon name='add' size='huge' />
           </Add>

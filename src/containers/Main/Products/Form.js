@@ -10,19 +10,6 @@ import setProductMutation from 'mutations/setProductMutation';
 
 import ImageUploader from 'helpers/withUpload';
 
-const CenteredAvatar = styled(Image)`
-  user-select: none;
-  display: initial !important;
-  margin: 50px 0;
-  transition: .5s ease;
-  backface-visibility: hidden;
-
-  &:hover {
-    opacity: 0.3;
-    cursor: pointer;
-  }
-`;
-
 const Actions = styled.div`
   text-align: center;
 `;
@@ -61,10 +48,6 @@ class FormContainer extends React.Component {
     this.props.history.push(`/products`);
   }
 
-  renderImageUploader() {
-    return <CenteredAvatar circular src={avatar} size="medium" />;
-  }
-
   render() {
     if (this.props.isNew) {
       var parrots = this.props.parrotsToProduct.edges.map(p => ({
@@ -75,8 +58,8 @@ class FormContainer extends React.Component {
     }
 
     return (
-      <Form onSubdmit={this.onSubmit}>
-        <ImageUploader render={this.renderImageUploader} />
+      <Form onSubmit={this.onSubmit}>
+        <ImageUploader circular src={avatar} size="medium" />
         <Form.Input
           id="parrot_price"
           label="Price"
