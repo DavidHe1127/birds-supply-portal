@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon, Image } from 'semantic-ui-react';
 
-const ImageHolder = styled.div`
+const Container = styled.div`
   margin-bottom: 10px;
   background: var(--cornflower-blue);
   text-align: center;
@@ -12,8 +12,13 @@ const HideFileInput = styled.input`
   display: none;
 `;
 
-const Wrapper = styled.div`
+const AvatarWrapper = styled.div`
   display: inline;
+  user-select: none;
+  display: initial !important;
+  margin: 50px 0;
+  transition: .5s ease;
+  backface-visibility: hidden;
 
   &:hover {
     opacity: 0.3;
@@ -25,21 +30,19 @@ const CenteredAvatar = styled(Image)`
   user-select: none;
   display: initial !important;
   margin: 50px 0;
-  transition: .5s ease;
-  backface-visibility: hidden;
 `;
 
 const Add = styled.div`
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   text-align: center;
 
-  ${Wrapper}:hover & {
+  ${AvatarWrapper}:hover & {
     opacity: 1;
   }
 `;
@@ -47,13 +50,7 @@ const Add = styled.div`
 export default class ImageUploader extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {file: '', imagePreviewUrl: '', onHover: false};
-  }
-
-  onHover (e) {
-    this.setState({
-      onHover: true
-    });
+    this.state = {file: '', imagePreviewUrl: ''};
   }
 
   onChange (e) {
@@ -84,17 +81,17 @@ export default class ImageUploader extends React.Component {
     // }
 
     return (
-      <ImageHolder>
+      <Container>
         <label>
-          <Wrapper>
+          <AvatarWrapper>
             <CenteredAvatar {...this.props} />
             <Add>
-              <Icon name='add' size='huge' />
+              <Icon name='add' size='massive' />
             </Add>
-          </Wrapper>
+          </AvatarWrapper>
           <HideFileInput type='file' onChange={this.onChange} />
         </label>
-      </ImageHolder>
+      </Container>
     );
   }
 }

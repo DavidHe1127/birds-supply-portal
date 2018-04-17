@@ -8,7 +8,7 @@ import avatar from 'images/parrot_avatar.jpg';
 import addProductMutation from 'mutations/addProductMutation';
 import setProductMutation from 'mutations/setProductMutation';
 
-import ImageUploader from 'helpers/withUpload';
+import ImageUploader from 'helpers/ImageUploader';
 
 const Actions = styled.div`
   text-align: center;
