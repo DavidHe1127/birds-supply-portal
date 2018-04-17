@@ -12,17 +12,21 @@ const HideFileInput = styled.input`
   display: none;
 `;
 
+const Wrapper = styled.div`
+  display: inline;
+
+  &:hover {
+    opacity: 0.3;
+    cursor: pointer;
+  }
+`;
+
 const CenteredAvatar = styled(Image)`
   user-select: none;
   display: initial !important;
   margin: 50px 0;
   transition: .5s ease;
   backface-visibility: hidden;
-
-  &:hover {
-    opacity: 0.3;
-    cursor: pointer;
-  }
 `;
 
 const Add = styled.div`
@@ -35,7 +39,7 @@ const Add = styled.div`
   -ms-transform: translate(-50%, -50%);
   text-align: center;
 
-  ${CenteredAvatar}:hover & {
+  ${Wrapper}:hover & {
     opacity: 1;
   }
 `;
@@ -82,10 +86,12 @@ export default class ImageUploader extends React.Component {
     return (
       <ImageHolder>
         <label>
-          <CenteredAvatar {...this.props} />
-          <Add>
-            <Icon name='add' size='huge' />
-          </Add>
+          <Wrapper>
+            <CenteredAvatar {...this.props} />
+            <Add>
+              <Icon name='add' size='huge' />
+            </Add>
+          </Wrapper>
           <HideFileInput type='file' onChange={this.onChange} />
         </label>
       </ImageHolder>
