@@ -48,21 +48,22 @@ const Add = styled.div`
 `;
 
 export default class ImageUploader extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {file: '', imagePreviewUrl: ''};
+
+  state = {
+    file: '',
+    imagePreviewUrl: ''
   }
 
-  onChange (e) {
+  onChange = e => {
     e.preventDefault();
 
-    let reader = new FileReader();
-    let file = e.target.files[0];
+    const reader = new FileReader();
+    const file = e.target.files[0];
 
     reader.onloadend = () => {
       this.setState({
         file: file,
-        imagePreviewUrl: reader.result,
+        imagePreviewUrl: reader.result
       });
     };
 
