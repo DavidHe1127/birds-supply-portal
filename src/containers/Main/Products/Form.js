@@ -59,7 +59,7 @@ class FormContainer extends React.Component {
 
     return (
       <Form onSubmit={this.onSubmit}>
-        <ImageUploader circular src={avatar} size="medium" />
+        <ImageUploader circular src={avatar} size="small" />
         <Form.Input
           id="parrot_price"
           label="Price"

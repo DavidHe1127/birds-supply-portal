@@ -36,7 +36,7 @@ const Add = styled.div`
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 30%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -87,7 +87,7 @@ export default class ImageUploader extends React.Component {
           <AvatarWrapper>
             <CenteredAvatar {...this.props} />
             <Add>
-              <Icon name='add' size='massive' />
+              <Icon name='add' size='huge' />
             </Add>
           </AvatarWrapper>
           <HideFileInput type='file' onChange={this.onChange} />
