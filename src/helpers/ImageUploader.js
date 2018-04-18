@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon, Image } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
+
+import placeholder from 'images/parrot_avatar.jpg';
 
 const Container = styled.div`
   margin-bottom: 10px;
@@ -26,17 +28,24 @@ const AvatarWrapper = styled.div`
   }
 `;
 
-const CenteredAvatar = styled(Image)`
+const Avatar = styled.div`
   user-select: none;
-  display: initial !important;
   margin: 50px 0;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  border: 3px solid var(--mystic);
+  background-position: center center;
+  background-size: cover;
+  border-radius: 500rem;
+  background-image: url(${props => props.src || placeholder});
 `;
 
 const Add = styled.div`
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 25%;
+  top: 28%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -85,7 +94,7 @@ export default class ImageUploader extends React.Component {
       <Container>
         <label>
           <AvatarWrapper>
-            <CenteredAvatar {...this.props} />
+            <Avatar src={this.state.imagePreviewUrl} />
             <Add>
               <Icon name='add' size='huge' />
             </Add>

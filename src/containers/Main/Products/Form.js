@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {withRouter} from 'react-router-dom';
 
 import {Form, Image, Select, Button} from 'semantic-ui-react';
-import avatar from 'images/parrot_avatar.jpg';
 
 import addProductMutation from 'mutations/addProductMutation';
 import setProductMutation from 'mutations/setProductMutation';
@@ -59,7 +58,7 @@ class FormContainer extends React.Component {
 
     return (
       <Form onSubmit={this.onSubmit}>
-        <ImageUploader circular src={avatar} size="small" />
+        <ImageUploader />
         <Form.Input
           id="parrot_price"
           label="Price"
