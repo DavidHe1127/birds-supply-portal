@@ -3,14 +3,16 @@
 This app aims at providing a platform for suppliers to provision/manage their products.
 
 ### What does this app do?
-Basically, every supplier in our system will be allocated an account to login to the portal. At the moment, portal allows suppliers to manage their products - create, update, view, delete their owned products. Product is created based on a bird model that defines intrinsic values such as lifespan, weight, length, distributions etc.
+It allows birds suppliers to manage their products. Product is created based on a bird model that defines intrinsic values such as lifespan, weight, length, distributions etc.
+
+Every supplier in our system will be allocated an account to login to the portal.
 
 We will keep committing to this app to embrace more features.
 
 It is an ongoing project.
 
 ### Why we build it?
-When new techs emerge, I always want to learn them (relay, graphql, aws, docker etc) by not just reading posts/writing experimental code but building something that leverages them. That way I will gain hands-on experiences with them and a clear understanding and memory of how they work. More importantly, it serves as a manual I can always refer to for a quick reference when I forget how I use them.
+When new techs emerge, I always want to learn them (relay, graphql, aws, docker etc) by not just reading posts or writing experimental code about them but building something using them. That way I will gain hands-on experiences with them and a clear understanding and memory of how they work. More importantly, it serves as a manual I can always refer to for a quick reference when I forget how I use them.
 
 ### About the contributors
 All contributors in this project have full-time jobs and try to squeeze time out of their spare time to make as much contribution as they can to make this app better.
@@ -28,6 +30,9 @@ Before run scripts below, make sure you have `Birds Supply Server` running in th
 Two things you need to be mindful about:
 * No need to run `npm run get:schema` if there is no change in `graphql` schema in the backend.
 * No need to run `npm run relay` if there is no change in `graphql` queries/mutations. i.e
+
+### Known issues
+* Unauthenticated users can bypass auth check through visiting route `/products/new` where auth check not happens.
 
 ```js
 const productsQuery = graphql`
