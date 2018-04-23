@@ -55,6 +55,7 @@ const productsQuery = graphql`
 * Add authentications (login, logout done to do signup)
 * Use aws s3, api gateway, coginito to implement product image upload/display (WIP)
 * Show qty on product card
+* Add multiple .env files for different deployment targets
 * Add optimistic update
 * Add pagination
 * Add validation
