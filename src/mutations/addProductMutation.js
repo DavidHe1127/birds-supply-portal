@@ -26,7 +26,7 @@ const addProductMutation = ({ price, parrot, qty }, cb) => {
     onCompleted: (res, err) => {
       cb && cb();
     },
-    onError: err => alert(err, 'fuck off!!!')
+    onError: err => alert(err, 'operation failed')
   });
 };
 

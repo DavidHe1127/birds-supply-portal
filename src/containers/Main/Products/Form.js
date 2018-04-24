@@ -18,7 +18,7 @@ class FormContainer extends React.Component {
     price: 0,
     qty: 0,
     parrot: null,
-  };
+  }
 
   onChange(e, {name, value}) {
     this.setState({
@@ -41,7 +41,7 @@ class FormContainer extends React.Component {
       },
       this.navigateOnAction,
     );
-  };
+  }
 
   navigateOnAction() {
     this.props.history.push(`/products`);
@@ -90,7 +90,7 @@ class FormContainer extends React.Component {
           />
         )}
         <Actions>
-          <Button positive>Action</Button>
+          <Button positive>Submit</Button>
           <Button negative>Cancel</Button>
         </Actions>
       </Form>
