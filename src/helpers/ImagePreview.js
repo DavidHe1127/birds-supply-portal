@@ -56,7 +56,7 @@ const Add = styled.div`
   }
 `;
 
-export default class ImageUploader extends React.Component {
+export default class ImagePreview extends React.Component {
 
   state = {
     file: '',
@@ -80,16 +80,6 @@ export default class ImageUploader extends React.Component {
   }
 
   render () {
-    let { imagePreviewUrl } = this.state;
-    // let $imagePreview = null;
-    // if (imagePreviewUrl) {
-    //   $imagePreview = <img src={imagePreviewUrl} />;
-    // } else {
-    //   $imagePreview = (
-    //     <div className="previewText">Please select an Image for Preview</div>
-    //   );
-    // }
-
     return (
       <Container>
         <label>

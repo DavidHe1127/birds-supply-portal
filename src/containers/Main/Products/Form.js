@@ -7,7 +7,7 @@ import {Form, Image, Select, Button} from 'semantic-ui-react';
 import addProductMutation from 'mutations/addProductMutation';
 import setProductMutation from 'mutations/setProductMutation';
 
-import ImageUploader from 'helpers/ImageUploader';
+import ImagePreview from 'helpers/ImagePreview';
 
 const Actions = styled.div`
   text-align: center;
@@ -58,7 +58,7 @@ class FormContainer extends React.Component {
 
     return (
       <Form onSubmit={this.onSubmit}>
-        <ImageUploader />
+        <ImagePreview />
         <Form.Input
           id="parrot_price"
           label="Price"
