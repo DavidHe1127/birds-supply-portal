@@ -11,6 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import auth from './auth';
+import { init } from './utils/buildFileUploadUrl';
 
 import Main from 'components/Main';
 import Login from 'containers/Login';
@@ -21,6 +22,8 @@ Amplify.configure({
     ...config
   }
 });
+
+init(process.env.REACT_APP_FILE_HANDLER_URL, process.env.REACT_APP_FILE_HANDLER_BUCKET);
 
 const PrivateRoute = ({component: Component, ...rest}) => (
   <Route

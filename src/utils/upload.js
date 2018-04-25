@@ -1,4 +1,4 @@
-const upload = ({ url, file, headers, token }) => {
+const upload = ({ url, file, token }) => {
   return fetch(url, {
     headers: {
       'Content-Type': file.type,

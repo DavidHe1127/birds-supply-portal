@@ -74,6 +74,8 @@ export default class ImagePreview extends React.Component {
         file: file,
         imagePreviewUrl: reader.result
       });
+
+      this.props.onImageSet(file);
     };
 
     reader.readAsDataURL(file);

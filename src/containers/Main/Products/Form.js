@@ -2,12 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import {withRouter} from 'react-router-dom';
 
-import {Form, Image, Select, Button} from 'semantic-ui-react';
+import {Form, Select, Button} from 'semantic-ui-react';
 
 import addProductMutation from 'mutations/addProductMutation';
 import setProductMutation from 'mutations/setProductMutation';
 
 import ImagePreview from 'helpers/ImagePreview';
+import upload from 'utils/upload';
+import withAuth from 'utils/withAuth';
+import buildFileUploadUrl from 'utils/buildFileUploadUrl';
+
+const uploadWithAuth = withAuth(upload);
 
 const Actions = styled.div`
   text-align: center;
@@ -18,26 +23,56 @@ class FormContainer extends React.Component {
     price: 0,
     qty: 0,
     parrot: null,
+    file: null
   }
 
-  onChange(e, {name, value}) {
+  onChange = (e, {name, value}) => {
     this.setState({
       [name]: value,
     });
   }
 
-  onSubmit = () => {
-    const {price, qty, parrot} = this.state;
+  syncAvatar = () => {
+    return uploadWithAuth({
+      url: buildFileUploadUrl({
+        name: this.state.parrot,
+        type: this.state.file.type
+      }),
+      file: this.state.file
+    });
+  }
 
+  onImageSet = file => {
+    this.setState({
+      file
+    });
+  }
+
+  onAddProduct = () => {
+    const {price, qty, parrot, file} = this.state;
+
+    if (file) {
+      return this.syncAvatar().then(res => {
+          return addProductMutation({ price, parrot, qty }, this.navigateOnAction);
+        })
+        .catch(err => {
+          console.log('avatar error', err);
+        });
+    }
+
+    return addProductMutation({ price, parrot, qty }, this.navigateOnAction);
+  }
+
+  onSubmit = () => {
     if (this.props.isNew) {
-      return addProductMutation({price, parrot, qty}, this.navigateOnAction);
+      return this.onAddProduct();
     }
 
     setProductMutation(
       {
         id: this.props.productId,
-        qty,
-        price,
+        qty: this.state.qty,
+        price: this.state.price,
       },
       this.navigateOnAction,
     );
@@ -58,7 +93,7 @@ class FormContainer extends React.Component {
 
     return (
       <Form onSubmit={this.onSubmit}>
-        <ImagePreview />
+        <ImagePreview onImageSet={this.onImageSet} />
         <Form.Input
           id="parrot_price"
           label="Price"
