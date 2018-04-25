@@ -10,7 +10,8 @@ import setProductMutation from 'mutations/setProductMutation';
 import ImagePreview from 'helpers/ImagePreview';
 import upload from 'utils/upload';
 import withAuth from 'utils/withAuth';
-import buildFileUploadUrl from 'utils/buildFileUploadUrl';
+import buildUrl from 'utils/buildUrl';
+import getTypeExtFromMime from 'utils/getTypeExtFromMime';
 
 const uploadWithAuth = withAuth(upload);
 
@@ -33,13 +34,15 @@ class FormContainer extends React.Component {
   }
 
   syncAvatar = () => {
+    const { ext } = getTypeExtFromMime(this.state.file.type);
+
     return uploadWithAuth({
-      url: buildFileUploadUrl({
+      url: buildUrl.upload({
         name: this.state.parrot,
-        type: this.state.file.type
+        ext
       }),
       file: this.state.file
-    });
+    }).then(res => this.state.parrot + '.' + ext);
   }
 
   onImageSet = file => {
@@ -52,8 +55,9 @@ class FormContainer extends React.Component {
     const {price, qty, parrot, file} = this.state;
 
     if (file) {
-      return this.syncAvatar().then(res => {
-          return addProductMutation({ price, parrot, qty }, this.navigateOnAction);
+      return this.syncAvatar().then(avatar => {
+          const avatarUrl = buildUrl.download(avatar);
+          return addProductMutation({ price, parrot, qty, avatarUrl }, this.navigateOnAction);
         })
         .catch(err => {
           console.log('avatar error', err);

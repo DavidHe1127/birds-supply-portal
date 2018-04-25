@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import auth from './auth';
-import { init } from './utils/buildFileUploadUrl';
+import { init } from './utils/buildUrl';
 
 import Main from 'components/Main';
 import Login from 'containers/Login';
