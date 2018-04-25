@@ -55,9 +55,9 @@ class FormContainer extends React.Component {
     const {price, qty, parrot, file} = this.state;
 
     if (file) {
-      return this.syncAvatar().then(avatar => {
-          const avatarUrl = buildUrl.download(avatar);
-          return addProductMutation({ price, parrot, qty, avatarUrl }, this.navigateOnAction);
+      return this.syncAvatar().then(res => {
+          const avatar = buildUrl.download(res);
+          return addProductMutation({ price, parrot, qty, avatar }, this.navigateOnAction);
         })
         .catch(err => {
           console.log('avatar error', err);

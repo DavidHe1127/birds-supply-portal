@@ -13,6 +13,7 @@ import {Link} from 'react-router-dom';
 import {Auth} from 'aws-amplify';
 
 import auth from 'auth';
+import Spinner from 'helpers/Spinner';
 
 import './styles/index.css';
 
@@ -91,14 +92,7 @@ export default class Login extends React.Component {
     );
 
     if (this.state.signingIn) {
-      return (
-        <React.Fragment>
-          <Dimmer active>
-            <Loader>Please wait...</Loader>
-          </Dimmer>
-          {main}
-        </React.Fragment>
-      );
+      return <Spinner>{main}</Spinner>;
     }
 
     return main;

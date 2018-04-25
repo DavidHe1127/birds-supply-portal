@@ -11,13 +11,13 @@ const mutation = graphql`
   }
 `;
 
-const addProductMutation = ({ price, parrot, qty, avatarUrl }, cb) => {
+const addProductMutation = ({ price, parrot, qty, avatar }, cb) => {
   const variables = {
     input: {
       price,
       parrotCode: parrot,
       qty,
-      avatarUrl
+      avatar
     }
   };
 
