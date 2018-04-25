@@ -9,6 +9,8 @@ import './index.css';
 
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+// load global state into store via react new context api
+import { Provider } from './store';
 
 import auth from './auth';
 import { init } from './utils/buildUrl';
@@ -17,6 +19,7 @@ import Main from 'components/Main';
 import Login from 'containers/Login';
 import Signup from 'containers/Signup';
 
+// bootstrap amplify with credentials
 Amplify.configure({
   Auth: {
     ...config
@@ -44,17 +47,19 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 );
 
 ReactDOM.render(
-  <Router>
-    <Switch>
-      <Route exact path="/" component={() => <Redirect to="/login" />} />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} />
-      <PrivateRoute path="/products" component={Main.Products} />
-      <PrivateRoute path="/events" component={Main.Events} />
-      <PrivateRoute path="/requests" component={Main.Requests} />
-    </Switch>
-  </Router>,
-  document.getElementById('root'),
+  <Provider>
+    <Router>
+      <Switch>
+        <Route exact path='/' component={() => <Redirect to='/login' />} />
+        <Route path='/login' component={Login} />
+        <Route path='/signup' component={Signup} />
+        <PrivateRoute path='/products' component={Main.Products} />
+        <PrivateRoute path='/events' component={Main.Events} />
+        <PrivateRoute path='/requests' component={Main.Requests} />
+      </Switch>
+    </Router>
+  </Provider>,
+  document.getElementById('root')
 );
 
 registerServiceWorker();

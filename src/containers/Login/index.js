@@ -6,14 +6,13 @@ import {
   Header,
   Message,
   Segment,
-  Dimmer,
-  Loader,
 } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import {Auth} from 'aws-amplify';
 
 import auth from 'auth';
 import Spinner from 'helpers/Spinner';
+import { Consumer } from 'store';
 
 import './styles/index.css';
 
@@ -56,39 +55,46 @@ export default class Login extends React.Component {
 
   render() {
     const main = (
-      <Grid centered verticalAlign="middle" columns={4} className="login">
-        <Grid.Column>
-          <Header as="h2" textAlign="center">
-            Log into your account
-          </Header>
-          <Form size="large" onSubmit={this.onSubmit}>
-            <Segment stacked>
-              <Form.Input
-                fluid
-                name="username"
-                label="Username"
-                placeholder="abc@abc.com"
-                onChange={this.onChange}
-                defaultValue={this.state.username}
-              />
-              <Form.Input
-                fluid
-                name="password"
-                label="Password"
-                type="password"
-                onChange={this.onChange}
-                defaultValue={this.state.password}
-              />
-              <Button color="yellow" fluid size="large">
-                Login
-              </Button>
-            </Segment>
-          </Form>
-          <Message>
-            New to us? <Link to="/signup">Sign Up</Link>
-          </Message>
-        </Grid.Column>
-      </Grid>
+      <Consumer>
+      {({ loading }) => {
+
+        console.log(loading);
+
+        return <Grid centered verticalAlign="middle" columns={4} className="login">
+          <Grid.Column>
+            <Header as="h2" textAlign="center">
+              Log into your account
+            </Header>
+            <Form size="large" onSubmit={this.onSubmit}>
+              <Segment stacked>
+                <Form.Input
+                  fluid
+                  name="username"
+                  label="Username"
+                  placeholder="abc@abc.com"
+                  onChange={this.onChange}
+                  defaultValue={this.state.username}
+                />
+                <Form.Input
+                  fluid
+                  name="password"
+                  label="Password"
+                  type="password"
+                  onChange={this.onChange}
+                  defaultValue={this.state.password}
+                />
+                <Button color="yellow" fluid size="large">
+                  Login
+                </Button>
+              </Segment>
+            </Form>
+            <Message>
+              New to us? <Link to="/signup">Sign Up</Link>
+            </Message>
+          </Grid.Column>
+        </Grid>
+      }}
+      </Consumer>
     );
 
     if (this.state.signingIn) {
