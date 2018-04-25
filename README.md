@@ -71,5 +71,5 @@ const productsQuery = graphql`
 * Each parrot species can only have one product linked to it under each supplier
 * Lodge a request if parrot species does not exist in the current system
 
-### issues
-* Failed to remove the node from products connection
+### Issues
+* Failed operation on s3 image upload through api gateway due to 401 status code does not ask users to re-authenticate
