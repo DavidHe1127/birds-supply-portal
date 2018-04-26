@@ -158,18 +158,11 @@ class FormContainer extends React.Component {
       </Form>
     );
 
-    // return view;
-    console.log('pppppp');
-
     return <Consumer mapStateToProps={mapStateToProps}>
       {({loading}) => {
-        console.log('cccc');
         if (loading) {
           return <Spinner>{view}</Spinner>;
         }
-
-        console.log(this.state);
-
         return view;
       }}
     </Consumer>;
