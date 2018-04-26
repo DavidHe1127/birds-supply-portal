@@ -52,7 +52,7 @@ const productsQuery = graphql`
 ```
 
 ### TODOs
-* Tidy MS3 api gateway - remove unused apis
+* Tidy up myS3 api gateway - remove unused apis
 * Response code mapping
 * Add authentications (login, logout done to do signup)
 * Use aws s3, api gateway, coginito to implement product image upload/display (WIP)
