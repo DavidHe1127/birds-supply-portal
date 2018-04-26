@@ -1,14 +1,10 @@
-import { initStore } from 'react-waterfall';
+import {initStore} from 'react-waterfall';
 
 const store = {
-  initialState: { loading: false },
+  initialState: {loading: false},
   actions: {
-    startLoading: ({ loading }) => ({ loading: true }),
-    stopLoading: ({ loading }) => ({ loading: false })
-  }
+    toggleLoading: ({loading}, newState) => newState,
+  },
 };
 
-export const {
-  Provider,
-  Consumer,
-} = initStore(store);
+export const {Provider, Consumer, actions} = initStore(store);
