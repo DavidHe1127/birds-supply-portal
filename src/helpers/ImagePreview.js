@@ -58,11 +58,6 @@ const Add = styled.div`
 
 export default class ImagePreview extends React.Component {
 
-  state = {
-    file: '',
-    imagePreviewUrl: ''
-  }
-
   onChange = e => {
     e.preventDefault();
 
@@ -70,12 +65,7 @@ export default class ImagePreview extends React.Component {
     const file = e.target.files[0];
 
     reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
-
-      this.props.onImageSet(file);
+      this.props.onImageSet(file, reader.result);
     };
 
     reader.readAsDataURL(file);
@@ -86,7 +76,7 @@ export default class ImagePreview extends React.Component {
       <Container>
         <label>
           <AvatarWrapper>
-            <Avatar src={this.state.imagePreviewUrl} />
+            <Avatar src={this.props.src} />
             <Add>
               <Icon name='add' size='huge' />
             </Add>

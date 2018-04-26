@@ -54,7 +54,7 @@ export default class Login extends React.Component {
   }
 
   render() {
-    const main = (
+    const view = (
       <Grid centered verticalAlign="middle" columns={4} className="login">
         <Grid.Column>
           <Header as="h2" textAlign="center">
@@ -93,10 +93,10 @@ export default class Login extends React.Component {
     return <Consumer mapStateToProps={mapStateToProps}>
       {({loading}) => {
         if (loading) {
-          return <Spinner>{main}</Spinner>;
+          return <Spinner>{view}</Spinner>;
         }
 
-        return main;
+        return view;
       }}
     </Consumer>;
   }

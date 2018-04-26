@@ -13,18 +13,26 @@ import withAuth from 'utils/withAuth';
 import buildUrl from 'utils/buildUrl';
 import getTypeExtFromMime from 'utils/getTypeExtFromMime';
 
+import Spinner from 'helpers/Spinner';
+import {Consumer, actions} from 'store';
+
 const uploadWithAuth = withAuth(upload);
 
 const Actions = styled.div`
   text-align: center;
 `;
 
+const mapStateToProps = state => ({
+  loading: state.loading,
+});
+
 class FormContainer extends React.Component {
   state = {
-    price: 0,
-    qty: 0,
+    price: null,
+    qty: null,
     parrot: null,
-    file: null
+    file: null,
+    avatarSrc: null
   }
 
   onChange = (e, {name, value}) => {
@@ -45,9 +53,10 @@ class FormContainer extends React.Component {
     }).then(res => this.state.parrot + '.' + ext);
   }
 
-  onImageSet = file => {
+  onImageSet = (file, src) => {
     this.setState({
-      file
+      file,
+      avatarSrc: src
     });
   }
 
@@ -57,17 +66,24 @@ class FormContainer extends React.Component {
     if (file) {
       return this.syncAvatar().then(res => {
           const avatar = buildUrl.download(res);
-          return addProductMutation({ price, parrot, qty, avatar }, this.navigateOnAction);
+          return addProductMutation({ price, parrot, qty, avatar }, this.onMutationDone);
         })
         .catch(err => {
+          actions.toggleLoading({
+            loading: false
+          });
           console.log('avatar error', err);
         });
     }
 
-    return addProductMutation({ price, parrot, qty }, this.navigateOnAction);
+    return addProductMutation({ price, parrot, qty }, this.onMutationDone);
   }
 
   onSubmit = () => {
+    actions.toggleLoading({
+      loading: true
+    });
+
     if (this.props.isNew) {
       return this.onAddProduct();
     }
@@ -78,12 +94,15 @@ class FormContainer extends React.Component {
         qty: this.state.qty,
         price: this.state.price,
       },
-      this.navigateOnAction,
+      this.onMutationDone,
     );
   }
 
-  navigateOnAction() {
-    this.props.history.push(`/products`);
+  onMutationDone = () => {
+    actions.toggleLoading({
+      loading: false
+    });
+    this.props.history.push('/products');
   }
 
   render() {
@@ -95,9 +114,12 @@ class FormContainer extends React.Component {
       }));
     }
 
-    return (
+    const defaultPrice = this.props.isNew ? this.state.price : this.props.productToEdit.price;
+    const defaultQty = this.props.isNew ? this.state.qty : this.props.productToEdit.qty;
+
+    const view = (
       <Form onSubmit={this.onSubmit}>
-        <ImagePreview onImageSet={this.onImageSet} />
+        <ImagePreview onImageSet={this.onImageSet} src={this.state.avatarSrc} />
         <Form.Input
           id="parrot_price"
           label="Price"
@@ -106,7 +128,7 @@ class FormContainer extends React.Component {
           max="999999"
           name="price"
           onChange={this.onChange}
-          defaultValue={!this.props.isNew && this.props.productToEdit.price}
+          defaultValue={defaultPrice}
         />
         <Form.Input
           id="parrot_qty"
@@ -116,7 +138,7 @@ class FormContainer extends React.Component {
           max="999"
           name="qty"
           onChange={this.onChange}
-          defaultValue={!this.props.isNew && this.props.productToEdit.qty}
+          defaultValue={defaultQty}
         />
         {this.props.isNew && (
           <Form.Field
@@ -125,6 +147,7 @@ class FormContainer extends React.Component {
             options={parrots}
             placeholder="Parrot Code"
             name="parrot"
+            defaultValue={this.state.parrot}
             onChange={this.onChange}
           />
         )}
@@ -134,6 +157,22 @@ class FormContainer extends React.Component {
         </Actions>
       </Form>
     );
+
+    // return view;
+    console.log('pppppp');
+
+    return <Consumer mapStateToProps={mapStateToProps}>
+      {({loading}) => {
+        console.log('cccc');
+        if (loading) {
+          return <Spinner>{view}</Spinner>;
+        }
+
+        console.log(this.state);
+
+        return view;
+      }}
+    </Consumer>;
   }
 }
 
