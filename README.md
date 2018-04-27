@@ -52,6 +52,7 @@ const productsQuery = graphql`
 ```
 
 ### TODOs
+* Use image processor api to crop image on the fly
 * Tidy up myS3 api gateway - remove unused apis
 * Response code mapping
 * Add authentications (login, logout done to do signup)
