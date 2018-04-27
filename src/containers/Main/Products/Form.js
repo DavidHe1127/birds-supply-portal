@@ -14,17 +14,13 @@ import buildUrl from 'utils/buildUrl';
 import getTypeExtFromMime from 'utils/getTypeExtFromMime';
 
 import Spinner from 'helpers/Spinner';
-import {Consumer, actions} from 'store';
+import {actions, connect} from 'store';
 
 const uploadWithAuth = withAuth(upload);
 
 const Actions = styled.div`
   text-align: center;
 `;
-
-const mapStateToProps = state => ({
-  loading: state.loading,
-});
 
 class FormContainer extends React.Component {
   state = {
@@ -64,19 +60,26 @@ class FormContainer extends React.Component {
     const {price, qty, parrot, file} = this.state;
 
     if (file) {
-      return this.syncAvatar().then(res => {
+      return this.syncAvatar()
+        .then(res => {
           const avatar = buildUrl.download(res);
-          return addProductMutation({ price, parrot, qty, avatar }, this.onMutationDone);
+          return addProductMutation(
+            {price, parrot, qty, avatar},
+            this.onMutationDone,
+          );
         })
         .catch(err => {
+          // TODO handle failed image upload error
+          console.log('err', err);
+        })
+        .finally(() => {
           actions.toggleLoading({
-            loading: false
+            loading: false,
           });
-          console.log('avatar error', err);
         });
     }
 
-    return addProductMutation({ price, parrot, qty }, this.onMutationDone);
+    return addProductMutation({price, parrot, qty}, this.onMutationDone);
   }
 
   onSubmit = () => {
@@ -106,6 +109,8 @@ class FormContainer extends React.Component {
   }
 
   render() {
+    const { loading } = this.props;
+
     if (this.props.isNew) {
       var parrots = this.props.parrotsToProduct.edges.map(p => ({
         key: p.node.id,
@@ -158,15 +163,16 @@ class FormContainer extends React.Component {
       </Form>
     );
 
-    return <Consumer mapStateToProps={mapStateToProps}>
-      {({loading}) => {
-        if (loading) {
-          return <Spinner>{view}</Spinner>;
-        }
-        return view;
-      }}
-    </Consumer>;
+    if (loading) {
+      return <Spinner>{view}</Spinner>;
+    }
+
+    return view;
   }
 }
 
-export default withRouter(FormContainer);
+const AppWithConsumer = connect(state => ({
+  loading: state.loading
+}))(FormContainer);
+
+export default withRouter(AppWithConsumer);

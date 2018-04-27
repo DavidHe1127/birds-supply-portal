@@ -5,15 +5,11 @@ import {Auth} from 'aws-amplify';
 
 import auth from 'auth';
 import Spinner from 'helpers/Spinner';
-import {Consumer, actions} from 'store';
+import {actions, connect} from 'store';
 
 import './styles/index.css';
 
-const mapStateToProps = state => ({
-  loading: state.loading,
-});
-
-export default class Login extends React.Component {
+class Login extends React.Component {
   state = {
     username: null,
     password: null,
@@ -30,7 +26,7 @@ export default class Login extends React.Component {
     const password = this.state.password.trim();
 
     actions.toggleLoading({
-      loading: true
+      loading: true,
     });
 
     Auth.signIn(username, password)
@@ -38,18 +34,17 @@ export default class Login extends React.Component {
         const {signInUserSession} = session;
         auth.set(signInUserSession);
         this.props.history.push('/products');
-
-        actions.toggleLoading({
-          loading: false
-        });
       })
       .catch(err => {
-        actions.toggleLoading({
-          loading: false
-        });
+        // TODO handle errors on failed signin
         return {
           error: err.message,
         };
+      })
+      .finally(() => {
+        actions.toggleLoading({
+          loading: false,
+        });
       });
   }
 
@@ -90,14 +85,14 @@ export default class Login extends React.Component {
       </Grid>
     );
 
-    return <Consumer mapStateToProps={mapStateToProps}>
-      {({loading}) => {
-        if (loading) {
-          return <Spinner>{view}</Spinner>;
-        }
+    if (this.props.loading) {
+      return <Spinner>{view}</Spinner>
+    }
 
-        return view;
-      }}
-    </Consumer>;
+    return view;
   }
 }
+
+export default connect(state => ({
+  loading: state.loading
+}))(Login);

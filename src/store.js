@@ -7,4 +7,4 @@ const store = {
   },
 };
 
-export const {Provider, Consumer, actions} = initStore(store);
+export const {Provider, Consumer, actions, connect} = initStore(store);
