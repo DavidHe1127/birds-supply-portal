@@ -31,6 +31,7 @@ export default createPaginationContainer(
             price
             qty
             sku
+            avatar
             parrot {
               ...Product_parrot
             }

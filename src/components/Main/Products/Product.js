@@ -2,10 +2,10 @@ import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Card, Image, Icon, Grid } from 'semantic-ui-react';
 
-import avatar from 'images/elliot.jpg';
+import defThumbnail from 'images/elliot.jpg';
 import './styles/index.css';
 
-const Product = ({ id, sku, price, qty, supplier, onDelete, onEdit }) => {
+const Product = ({ id, sku, price, qty, avatar, supplier, onDelete, onEdit }) => {
   const withProdNameOnDelete = e =>
     onDelete(e, {
       sku,
@@ -19,7 +19,7 @@ const Product = ({ id, sku, price, qty, supplier, onDelete, onEdit }) => {
 
   return (
     <Card className="shadow">
-      <Image src={avatar} />
+      <Image src={avatar || defThumbnail} />
       <Card.Content>
         <Card.Header className="sku">{sku}</Card.Header>
         <Card.Description>
