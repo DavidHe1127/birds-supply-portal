@@ -5,4 +5,4 @@ const withAuth = operation => {
   return props => operation(Object.assign({}, props, {token}));
 };
 
-export default withAuth;
+export { withAuth };

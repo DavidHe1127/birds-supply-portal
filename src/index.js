@@ -26,7 +26,7 @@ Amplify.configure({
   }
 });
 
-init(process.env.REACT_APP_FILE_HANDLER_URL, process.env.REACT_APP_FILE_HANDLER_BUCKET);
+init(process.env.REACT_APP_FILE_HANDLER_API, process.env.REACT_APP_FILE_HANDLER_BUCKET);
 
 const PrivateRoute = ({component: Component, ...rest}) => (
   <Route

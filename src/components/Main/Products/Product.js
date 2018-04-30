@@ -4,6 +4,7 @@ import { Card, Image, Icon, Grid } from 'semantic-ui-react';
 
 import defThumbnail from 'images/elliot.jpg';
 import './styles/index.css';
+import buildUrl from 'utils/buildUrl';
 
 const Product = ({ id, sku, price, qty, avatar, supplier, onDelete, onEdit }) => {
   const withProdNameOnDelete = e =>
@@ -17,9 +18,19 @@ const Product = ({ id, sku, price, qty, avatar, supplier, onDelete, onEdit }) =>
       id
     });
 
+  const imageUrl = buildUrl.imageProcessor({
+    url: process.env.REACT_APP_IMAGE_PROCESSOR_API,
+    queries: {
+      w: 200,
+      h: 200,
+      q: 10,
+      f: avatar
+    }
+  });
+
   return (
     <Card className="shadow">
-      <Image src={avatar || defThumbnail} />
+      <Image src={imageUrl || defThumbnail} />
       <Card.Content>
         <Card.Header className="sku">{sku}</Card.Header>
         <Card.Description>

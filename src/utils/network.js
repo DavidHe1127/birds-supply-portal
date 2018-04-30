@@ -9,4 +9,4 @@ const upload = ({ url, file, token }) => {
   });
 };
 
-export default upload;
+export { upload };

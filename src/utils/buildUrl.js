@@ -7,8 +7,17 @@ const init = (base, bucket) => {
 };
 
 const buildUrl = {
-  upload: ({ name, ext }) => `${b1}/${b2}/${name}.${ext}`,
-  download: name => `https://s3-us-east-2.amazonaws.com/${b2}/${name}`
+  upload: ({name, ext}) => `${b1}/${b2}/${name}.${ext}`,
+  imageProcessor: ({url, queries}) => {
+    const q = Object.entries(queries)
+      .map(x => {
+        const [k, v] = x;
+        return `${k}=${v}`;
+      })
+      .join('&');
+
+    return `${url}?${q}`;
+  },
 };
 
 export { init };

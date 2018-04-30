@@ -8,8 +8,8 @@ import addProductMutation from 'mutations/addProductMutation';
 import setProductMutation from 'mutations/setProductMutation';
 
 import ImagePreview from 'helpers/ImagePreview';
-import upload from 'utils/upload';
-import withAuth from 'utils/withAuth';
+import { upload } from 'utils/network';
+import { withAuth } from 'utils/decorator';
 import buildUrl from 'utils/buildUrl';
 import getTypeExtFromMime from 'utils/getTypeExtFromMime';
 
@@ -62,7 +62,7 @@ class FormContainer extends React.Component {
     if (file) {
       return this.syncAvatar()
         .then(res => {
-          const avatar = buildUrl.download(res);
+          const avatar = res;
           return addProductMutation(
             {price, parrot, qty, avatar},
             this.onMutationDone,
