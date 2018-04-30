@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "babel-plugin-relay": "^1.5.0",
+    "get-graphql-schema": "^2.1.1",
     "relay-compiler": "^1.5.0"
   },
   "scripts": {
@@ -58,7 +59,7 @@
     "build": "node scripts/build.js",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
     "relay:watch": "npm run relay -- --watch",
-    "get:schema": "get-graphql-schema http://127.0.0.1:4000/graphql > schema.graphql",
+    "get:schema": "npx get-graphql-schema http://127.0.0.1:4000/graphql > schema.graphql",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
