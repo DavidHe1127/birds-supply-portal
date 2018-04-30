@@ -3,8 +3,12 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { Card, Image, Icon, Grid } from 'semantic-ui-react';
 
 import defThumbnail from 'images/elliot.jpg';
+import ImageProcess from 'helpers/ImageProcess';
 import './styles/index.css';
-import buildUrl from 'utils/buildUrl';
+
+const imageProcessRender = url => {
+  return <Image src={url} />
+};
 
 const Product = ({ id, sku, price, qty, avatar, supplier, onDelete, onEdit }) => {
   const withProdNameOnDelete = e =>
@@ -18,19 +22,18 @@ const Product = ({ id, sku, price, qty, avatar, supplier, onDelete, onEdit }) =>
       id
     });
 
-  const imageUrl = buildUrl.imageProcessor({
-    url: process.env.REACT_APP_IMAGE_PROCESSOR_API,
-    queries: {
-      w: 200,
-      h: 200,
-      q: 10,
-      f: avatar
-    }
-  });
+  const imageProcessProps = {
+    w: 200,
+    h: 200,
+    q: 10,
+    f: avatar
+  };
+
+  // <Image src={imageUrl || defThumbnail} />
 
   return (
     <Card className="shadow">
-      <Image src={imageUrl || defThumbnail} />
+      <ImageProcess {...imageProcessProps} render={imageProcessRender} />
       <Card.Content>
         <Card.Header className="sku">{sku}</Card.Header>
         <Card.Description>

@@ -9,4 +9,6 @@ const upload = ({ url, file, token }) => {
   });
 };
 
-export { upload };
+const fetchImage = url => fetch(url);
+
+export { upload, fetchImage };
