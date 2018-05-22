@@ -31,6 +31,16 @@ type addProductPayload {
   product: Product
 }
 
+input addRequestInput {
+  bird: String
+  code: String
+  reason: String
+}
+
+type addRequestPayload {
+  request: Request
+}
+
 # Customer
 type Customer {
   id: ID!
@@ -78,6 +88,8 @@ type Mutation {
   addProduct(input: addProductInput!): addProductPayload
   delProduct(input: delProductInput!): delProductPayload
   setProduct(input: setProductInput!): setProductPayload
+  addRequest(input: addRequestInput!): addRequestPayload
+  setRequestStatus(input: setRequestStatusInput!): setRequestStatusPayload
 }
 
 interface Node {
@@ -155,6 +167,8 @@ type Query {
   parrot(id: ID, code: String): Parrot
   parrots(skip: Int, after: String, before: String, first: Int, last: Int): ParrotConnection
   parrotsToProduct(supplierId: ID): ParrotConnection
+  request(id: ID!): Request
+  requests(skip: Int, after: String, before: String, first: Int, last: Int, reqId: ID): RequestConnection
   product(id: ID!): Product
   products(skip: Int, after: String, before: String, first: Int, last: Int, supplierId: ID): ProductConnection
   bestSellers(skip: Int, after: String, before: String, first: Int, last: Int, supplierId: ID): ProductConnection
@@ -162,6 +176,27 @@ type Query {
   suppliers(skip: Int, after: String, before: String, first: Int, last: Int): SupplierConnection
   viewer: User
   errors: [Error]
+}
+
+type Request implements Node {
+  id: ID!
+  bird: String
+  code: String
+  reason: String
+  status: Status
+}
+
+type RequestConnection {
+  pageInfo: PageInfo!
+
+  # a list of edges
+  edges: [RequestEdge]
+  count: Int!
+}
+
+type RequestEdge {
+  cursor: String
+  node: Request
 }
 
 input setCustomerInput {
@@ -179,11 +214,27 @@ type setProductPayload {
   product: Product
 }
 
+input setRequestStatusInput {
+  id: ID!
+  status: Status
+}
+
+type setRequestStatusPayload {
+  request: Request
+}
+
 enum Species {
   macaws
   conures
   cockatoos
   amazons
+}
+
+# Request
+enum Status {
+  pending
+  rejected
+  approved
 }
 
 # Supplier
