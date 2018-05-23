@@ -32,7 +32,7 @@ type addProductPayload {
 }
 
 input addRequestInput {
-  bird: String
+  parrot: String
   code: String
   reason: String
 }
@@ -180,7 +180,7 @@ type Query {
 
 type Request implements Node {
   id: ID!
-  bird: String
+  parrot: String
   code: String
   reason: String
   status: Status

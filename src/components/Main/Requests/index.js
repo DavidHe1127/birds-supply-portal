@@ -13,19 +13,19 @@ import RequestTableBody from './Table.Body';
 
 const _REQUESTS = [{
   reqId: '1jkl',
-  bird: 'caique',
+  parrot: 'caique',
   code: 'caique',
   reason: 'It\'s missing from our system',
   status: 'approved'
 }, {
   reqId: 'cj31',
-  bird: 'sun conure',
+  parrot: 'sun conure',
   code: 'sun_conure',
   reason: 'We have a new request from customers for this',
   status: 'rejected'
 }, {
   reqId: '7ouv',
-  bird: 'indian ringneck',
+  parrot: 'indian ringneck',
   code: 'indian_ringneck',
   reason: 'A beautiful bird',
   status: 'pending'
