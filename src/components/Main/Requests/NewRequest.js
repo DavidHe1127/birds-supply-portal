@@ -1,7 +1,9 @@
 import React from 'react';
+import {Container, Header, Button, Form, TextArea} from 'semantic-ui-react';
+
+import Common from 'components/common';
 // import { createFragmentContainer, graphql } from 'react-relay';
 
-import {Container, Header, Button, Form, TextArea} from 'semantic-ui-react';
 
 // import Form from 'containers/Main/Products/Form';
 
@@ -24,8 +26,10 @@ class NewRequest extends React.Component {
             label="About"
             placeholder="Tell us the reason you need this new bird"
           />
-          <Button type="submit" positive>Submit</Button>
-          <Button negative>Cancel</Button>
+          <Common.Centralizer>
+            <Button type="submit" positive>Submit</Button>
+            <Button negative>Cancel</Button>
+          </Common.Centralizer>
         </Form>
       </Container>
     );
