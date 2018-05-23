@@ -3,8 +3,10 @@ import {
   Container,
   Divider,
   Header,
-  Table
+  Table,
+  Button
 } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
 
 import RequestTableHeader from './Table.Header';
 import RequestTableBody from './Table.Body';
@@ -29,10 +31,14 @@ const _REQUESTS = [{
   status: 'pending'
 }];
 
-export default class Requests extends React.Component {
+class Requests extends React.Component {
+
+  onNewRequestClick = e => this.props.history.push('/requests/new')
+
   render() {
     return (
       <Container>
+        <Button content='New Request' primary onClick={this.onNewRequestClick} />
         <Header as="h1">Your Requests</Header>
         <Divider />
         <Table celled>
@@ -43,3 +49,5 @@ export default class Requests extends React.Component {
     );
   }
 }
+
+export default withRouter(Requests);

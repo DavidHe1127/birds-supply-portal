@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Requests from 'containers/Main/Requests';
+import Requests from 'components/Main/Requests/Routes';
 import Products from 'components/Main/Products/Routes';
 import Events from 'containers/Main/Events';
 

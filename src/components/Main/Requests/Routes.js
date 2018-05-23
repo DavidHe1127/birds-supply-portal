@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Requests from 'containers/Main/Requests';
-import NewRequest from 'containers/Main/Requests/NewRequest';
+import NewRequest from 'components/Main/Requests/NewRequest';
 
 export default () => (
   <Switch>
