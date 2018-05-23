@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 import {Container, Header, Button, Form, TextArea} from 'semantic-ui-react';
 
 import Common from 'components/common';
@@ -8,6 +9,9 @@ import Common from 'components/common';
 // import Form from 'containers/Main/Products/Form';
 
 class NewRequest extends React.Component {
+
+  onCancel = e => this.props.history.push('/requests')
+
   render() {
     return (
       <Container>
@@ -27,8 +31,8 @@ class NewRequest extends React.Component {
             placeholder="Tell us the reason you need this new bird"
           />
           <Common.Centralizer>
-            <Button type="submit" positive>Submit</Button>
-            <Button negative>Cancel</Button>
+            <Button positive>Submit</Button>
+            <Button negative onClick={this.onCancel}>Cancel</Button>
           </Common.Centralizer>
         </Form>
       </Container>
@@ -36,4 +40,4 @@ class NewRequest extends React.Component {
   }
 }
 
-export default NewRequest;
+export default withRouter(NewRequest);
