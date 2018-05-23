@@ -2,25 +2,40 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {Container, Header, Button, Form} from 'semantic-ui-react';
 
+import addNewParrotRequestMutation from 'mutations/addNewParrotRequestMutation';
 import Common from 'components/common';
 
 class NewRequestForm extends React.Component {
   state = {
     parrot: null,
-    code: null,
+    code: '',
     reason: null,
   }
+
+  onOperationSuccess = e => this.props.history.push('/requests')
 
   onCancel = e => this.props.history.push('/requests')
 
   onSubmit = e => {
-    console.log(this.state)
+    const props = {
+      parrot: this.state.parrot,
+      code: this.state.code,
+      reason: this.state.reason
+    };
+
+    addNewParrotRequestMutation(props, this.onOperationSuccess);
   }
 
   onChange = (e, {name, value}) => {
-    this.setState({
+    const toUpdate = {
       [name]: value
-    });
+    };
+
+    if (name === 'parrot') {
+      toUpdate.code = value.toLowerCase();
+    }
+
+    this.setState(toUpdate);
   }
 
   render() {
@@ -45,6 +60,7 @@ class NewRequestForm extends React.Component {
             name="code"
             placeholder="Your parrot code. i.e xxx-yyy If leave blank, lowercase of parrot will then be used"
             onChange={this.onChange}
+            value={this.state.code}
           />
           <Form.TextArea
             label="Reason"
