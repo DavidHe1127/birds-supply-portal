@@ -31,7 +31,7 @@ const render = ({error, props}) => {
   } else if (props && props.viewer) {
     return <ProductsContainerWithRouter viewer={props.viewer} />;
   }
-  return <div>Loading</div>;
+  return null;
 };
 
 export default class ProductsIndexContainer extends Component {
