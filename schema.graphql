@@ -167,6 +167,7 @@ type Query {
   parrot(id: ID, code: String): Parrot
   parrots(skip: Int, after: String, before: String, first: Int, last: Int): ParrotConnection
   parrotsToProduct(supplierId: ID): ParrotConnection
+  ifParrotExist(code: String!): Boolean
   request(id: ID!): Request
   requests(skip: Int, after: String, before: String, first: Int, last: Int, reqId: ID): RequestConnection
   product(id: ID!): Product
