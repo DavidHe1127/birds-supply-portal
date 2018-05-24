@@ -4,6 +4,7 @@ import {Container, Header, Button, Form} from 'semantic-ui-react';
 
 import addNewParrotRequestMutation from 'mutations/addNewParrotRequestMutation';
 import Common from 'components/common';
+import query from 'queries';
 
 class NewRequestForm extends React.Component {
   state = {
@@ -24,6 +25,12 @@ class NewRequestForm extends React.Component {
     };
 
     addNewParrotRequestMutation(props, this.onOperationSuccess);
+  }
+
+  checkParrotExistence = () => {
+
+
+    ifParrotExist
   }
 
   onChange = (e, {name, value}) => {
