@@ -11,7 +11,7 @@ const RequestTableHeader = ({requests}) => {
   const rows = requests.map(x => (
     <Table.Row>
       <Table.Cell>{x.reqId}</Table.Cell>
-      <Table.Cell>{x.bird}</Table.Cell>
+      <Table.Cell>{x.parrot}</Table.Cell>
       <Table.Cell>{x.code}</Table.Cell>
       <Table.Cell>{x.reason}</Table.Cell>
       <Table.Cell>

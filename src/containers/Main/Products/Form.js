@@ -1,12 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 import {withRouter} from 'react-router-dom';
-
 import {Form, Select, Button} from 'semantic-ui-react';
 
 import addProductMutation from 'mutations/addProductMutation';
 import setProductMutation from 'mutations/setProductMutation';
 
+import Common from 'components/common';
 import ImagePreview from 'helpers/ImagePreview';
 import { upload } from 'utils/network';
 import { withAuth } from 'utils/decorator';
@@ -17,10 +16,6 @@ import Spinner from 'helpers/Spinner';
 import {actions, connect} from 'store';
 
 const uploadWithAuth = withAuth(upload);
-
-const Actions = styled.div`
-  text-align: center;
-`;
 
 class FormContainer extends React.Component {
   state = {
@@ -156,10 +151,10 @@ class FormContainer extends React.Component {
             onChange={this.onChange}
           />
         )}
-        <Actions>
+        <Common.Centralizer>
           <Button positive>Submit</Button>
           <Button negative>Cancel</Button>
-        </Actions>
+        </Common.Centralizer>
       </Form>
     );
 
