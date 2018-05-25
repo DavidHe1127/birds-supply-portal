@@ -5,6 +5,8 @@ import {Container, Header, Button, Form} from 'semantic-ui-react';
 import addNewParrotRequestMutation from 'mutations/addNewParrotRequestMutation';
 import Common from 'components/common';
 
+import query from './queries';
+
 class NewRequestForm extends React.Component {
   state = {
     parrot: null,
@@ -14,7 +16,15 @@ class NewRequestForm extends React.Component {
 
   onOperationSuccess = e => this.props.history.push('/requests')
 
-  onCancel = e => this.props.history.push('/requests')
+  onCancel = e => {
+    query('ifParrotExist', {
+      code: 'scarlet_macaw'
+    }).then(res => {
+      console.log(res)
+    });
+
+   // this.props.history.push('/requests')
+  }
 
   onSubmit = e => {
     const props = {
