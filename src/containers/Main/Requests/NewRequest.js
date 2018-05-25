@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {Container, Header, Button, Form} from 'semantic-ui-react';
+import {Container, Header, Button, Form, Message} from 'semantic-ui-react';
 
 import addNewParrotRequestMutation from 'mutations/addNewParrotRequestMutation';
 import Common from 'components/common';
@@ -12,6 +12,7 @@ class NewRequestForm extends React.Component {
     parrot: null,
     code: '',
     reason: null,
+    error: null
   }
 
   onOperationSuccess = e => this.props.history.push('/requests')
@@ -22,6 +23,10 @@ class NewRequestForm extends React.Component {
   }
 
   onSubmit = e => {
+    if (this.state.error) {
+      return;
+    }
+
     const props = {
       parrot: this.state.parrot,
       code: this.state.code,
@@ -31,12 +36,14 @@ class NewRequestForm extends React.Component {
     addNewParrotRequestMutation(props, this.onOperationSuccess);
   }
 
-  checkParrotExistence = () => {
+  checkParrotExistence = parrtCode => {
     query('ifParrotExist', {
-      code: 'scarlet_macaw'
-    }).then(res => {
-      console.log(res)
-    });
+      code: parrtCode
+    }).then(({ ifParrotExist }) =>
+      this.setState({
+        error: !!ifParrotExist
+      })
+    );
   }
 
   onChange = (e, {name, value}) => {
@@ -51,21 +58,30 @@ class NewRequestForm extends React.Component {
     this.setState(toUpdate);
   }
 
+  onBlur = () => this.state.code.trim() && this.checkParrotExistence(this.state.code)
+
   render() {
-    const props = {
-      onCancel: this.onCancel,
+    const FormProps = {
+      onSubmit: this.onSubmit,
+      error: this.state.error
     };
 
     return (
       <Container text>
         <Header as="h1">New Parrot Request</Header>
-        <Form onSubmit={this.onSubmit}>
+        <Form {...FormProps}>
+          {this.state.error && <Message
+            error
+            header='Oops! Something went wrong!'
+            content='Parrot code already exists in the system! Please use a different one.'
+          />}
           <Form.Input
             id="parrot"
             label="Parrot"
             name="parrot"
             placeholder="Parrot name i.e caique, sun conure"
             onChange={this.onChange}
+            onBlur={this.onBlur}
           />
           <Form.Input
             id="code"
@@ -73,6 +89,7 @@ class NewRequestForm extends React.Component {
             name="code"
             placeholder="Your parrot code. i.e xxx-yyy If leave blank, lowercase of parrot will then be used"
             onChange={this.onChange}
+            onBlur={this.onBlur}
             value={this.state.code}
           />
           <Form.TextArea
