@@ -7,29 +7,30 @@ import {
   Button
 } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
+import { createFragmentContainer, graphql } from 'react-relay';
 
 import RequestTableHeader from './Table.Header';
 import RequestTableBody from './Table.Body';
 
-const _REQUESTS = [{
-  reqId: '1jkl',
-  parrot: 'caique',
-  code: 'caique',
-  reason: 'It\'s missing from our system',
-  status: 'approved'
-}, {
-  reqId: 'cj31',
-  parrot: 'sun conure',
-  code: 'sun_conure',
-  reason: 'We have a new request from customers for this',
-  status: 'rejected'
-}, {
-  reqId: '7ouv',
-  parrot: 'indian ringneck',
-  code: 'indian_ringneck',
-  reason: 'A beautiful bird',
-  status: 'pending'
-}];
+// const _REQUESTS = [{
+//   reqId: '1jkl',
+//   parrot: 'caique',
+//   code: 'caique',
+//   reason: 'It\'s missing from our system',
+//   status: 'approved'
+// }, {
+//   reqId: 'cj31',
+//   parrot: 'sun conure',
+//   code: 'sun_conure',
+//   reason: 'We have a new request from customers for this',
+//   status: 'rejected'
+// }, {
+//   reqId: '7ouv',
+//   parrot: 'indian ringneck',
+//   code: 'indian_ringneck',
+//   reason: 'A beautiful bird',
+//   status: 'pending'
+// }];
 
 class Requests extends React.Component {
 
@@ -43,11 +44,29 @@ class Requests extends React.Component {
         <Divider />
         <Table celled>
           <RequestTableHeader />
-          <RequestTableBody requests={_REQUESTS} />
+          <RequestTableBody requests={this.props.viewer.requests.edges} />
         </Table>
       </Container>
     );
   }
 }
 
-export default withRouter(Requests);
+export default withRouter(createFragmentContainer(
+  Requests,
+  graphql`
+    fragment Requests_viewer on User {
+      requests(first: 50) @connection(key: "Requests_requests", filters: []) {
+        edges {
+          cursor
+          node {
+            id
+            parrot
+            code
+            reason
+            status
+          }
+        }
+      }
+    }
+  `
+));

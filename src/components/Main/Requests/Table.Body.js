@@ -7,16 +7,16 @@ const STATUS_LABEL_COLOR = {
   approved: 'green',
 };
 
-const RequestTableHeader = ({requests}) => {
+const RequestTableBody = ({requests}) => {
   const rows = requests.map(x => (
-    <Table.Row>
-      <Table.Cell>{x.reqId}</Table.Cell>
-      <Table.Cell>{x.parrot}</Table.Cell>
-      <Table.Cell>{x.code}</Table.Cell>
-      <Table.Cell>{x.reason}</Table.Cell>
+    <Table.Row key={x.node.id}>
+      <Table.Cell>{x.node.id}</Table.Cell>
+      <Table.Cell>{x.node.parrot}</Table.Cell>
+      <Table.Cell>{x.node.code}</Table.Cell>
+      <Table.Cell>{x.node.reason}</Table.Cell>
       <Table.Cell>
-        <Label color={STATUS_LABEL_COLOR[x.status]} tag>
-          {x.status}
+        <Label color={STATUS_LABEL_COLOR[x.node.status]} tag>
+          {x.node.status}
         </Label>
       </Table.Cell>
     </Table.Row>
@@ -25,4 +25,4 @@ const RequestTableHeader = ({requests}) => {
   return <Table.Body>{rows}</Table.Body>;
 };
 
-export default RequestTableHeader;
+export default RequestTableBody;

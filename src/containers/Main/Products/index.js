@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from 'Environment';
 
@@ -34,7 +34,7 @@ const render = ({error, props}) => {
   return null;
 };
 
-export default class ProductsIndexContainer extends Component {
+export default class ProductsIndexContainer extends React.Component {
 
   render () {
     return (

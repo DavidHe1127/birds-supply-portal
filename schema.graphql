@@ -274,5 +274,6 @@ type SupplierParrotsEdge {
 type User implements Node {
   id: ID!
   products(skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection
+  requests(skip: Int, after: String, before: String, first: Int, last: Int): RequestConnection
 }
 

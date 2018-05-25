@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {Container, Header, Button, Form, Message} from 'semantic-ui-react';
 

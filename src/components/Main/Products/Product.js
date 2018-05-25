@@ -1,6 +1,6 @@
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Card, Image, Icon, Grid } from 'semantic-ui-react';
+import { Card, Icon, Grid } from 'semantic-ui-react';
 
 import IronImage from 'helpers/IronImage';
 import './styles/index.css';
