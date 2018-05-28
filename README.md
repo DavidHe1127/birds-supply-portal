@@ -52,12 +52,9 @@ const productsQuery = graphql`
 ```
 
 ### TODOs
-* Use image processor api to crop image on the fly
+* Finish up new bird request processing & request status change notification
 * Tidy up myS3 api gateway - remove unused apis
-* Response code mapping
 * Add authentications (login, logout done to do signup)
-* Use aws s3, api gateway, coginito to implement product image upload/display (WIP)
-* Show qty on product card
 * Add multiple .env files for different deployment targets
 * Add optimistic update
 * Add pagination
