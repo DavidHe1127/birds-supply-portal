@@ -1,16 +1,10 @@
 import React from 'react';
-import {
-  Container,
-  Divider,
-  Header,
-  Table,
-  Button
-} from 'semantic-ui-react';
-import { withRouter } from 'react-router-dom';
-import { createFragmentContainer, graphql } from 'react-relay';
+import {Container, Divider, Header, Table, Button} from 'semantic-ui-react';
+import {withRouter} from 'react-router-dom';
+import {createFragmentContainer, graphql} from 'react-relay';
 
 import RequestTableHeader from './Table.Header';
-import RequestTableBody from './Table.Body';
+import RequestTableRow from './Table.Row';
 
 // const _REQUESTS = [{
 //   reqId: '1jkl',
@@ -33,40 +27,49 @@ import RequestTableBody from './Table.Body';
 // }];
 
 class Requests extends React.Component {
-
-  onNewRequestClick = e => this.props.history.push('/requests/new')
+  onNewRequestClick = e => this.props.history.push('/requests/new');
 
   render() {
+    const rows = this.props.viewer.requests.edges.map(x => (
+      <RequestTableRow key={x.node.id} request={x.node} />
+    ));
+
     return (
       <Container>
-        <Button content='New Request' primary onClick={this.onNewRequestClick} />
+        <Button
+          content="New Request"
+          primary
+          onClick={this.onNewRequestClick}
+        />
         <Header as="h1">Your Requests</Header>
         <Divider />
         <Table celled>
           <RequestTableHeader />
-          <RequestTableBody requests={this.props.viewer.requests.edges} />
+          <Table.Body>{rows}</Table.Body>
         </Table>
       </Container>
     );
   }
 }
 
-export default withRouter(createFragmentContainer(
-  Requests,
-  graphql`
-    fragment Requests_viewer on User {
-      requests(first: 50) @connection(key: "Requests_requests", filters: []) {
-        edges {
-          cursor
-          node {
-            id
-            parrot
-            code
-            reason
-            status
+export default withRouter(
+  createFragmentContainer(
+    Requests,
+    graphql`
+      fragment Requests_viewer on User {
+        requests(first: 50) @connection(key: "Requests_requests", filters: []) {
+          edges {
+            cursor
+            node {
+              id
+              parrot
+              code
+              reason
+              status
+            }
           }
         }
       }
-    }
-  `
-));
+    `,
+  ),
+);
