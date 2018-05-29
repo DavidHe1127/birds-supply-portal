@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Label} from 'semantic-ui-react';
+import {Table, Label, Button} from 'semantic-ui-react';
 
 const STATUS_LABEL_COLOR = {
   pending: 'blue',
@@ -15,9 +15,16 @@ const RequestTableBody = ({requests}) => {
       <Table.Cell>{x.node.code}</Table.Cell>
       <Table.Cell>{x.node.reason}</Table.Cell>
       <Table.Cell>
-        <Label color={STATUS_LABEL_COLOR[x.node.status]} tag>
-          {x.node.status}
+        <Label color={STATUS_LABEL_COLOR[x.node.status]}>
+          {x.node.status.toUpperCase()}
         </Label>
+      </Table.Cell>
+      <Table.Cell>
+        <Button.Group>
+          <Button positive>Approve</Button>
+          <Button.Or />
+          <Button negative>Reject</Button>
+        </Button.Group>;
       </Table.Cell>
     </Table.Row>
   ));
