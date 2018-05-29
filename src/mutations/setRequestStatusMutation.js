@@ -2,23 +2,21 @@ import { commitMutation, graphql } from 'react-relay';
 import environment from 'Environment';
 
 const mutation = graphql`
-  mutation setProductMutation($input: setProductInput!) {
-    setProduct(input: $input) {
-      product {
+  mutation setRequestStatusMutation($input: setRequestStatusInput!) {
+    setRequestStatus(input: $input) {
+      request {
         id
-        price
-        qty
+        status
       }
     }
   }
 `;
 
-const setProductMutation = ({ id, price, qty }, cb) => {
+const setRequestStatusMutation = ({ id, status }, cb) => {
   const variables = {
     input: {
       id,
-      qty,
-      price
+      status
     }
   };
 
@@ -28,8 +26,8 @@ const setProductMutation = ({ id, price, qty }, cb) => {
     onCompleted: (res, err) => {
       cb && cb();
     },
-    onError: err => alert(err, 'Not allowed!!')
+    onError: err => alert(err, 'Not allowed')
   });
 };
 
-export default setProductMutation;
+export default setRequestStatusMutation;
