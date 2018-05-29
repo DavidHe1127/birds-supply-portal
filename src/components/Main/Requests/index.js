@@ -3,8 +3,8 @@ import {Container, Divider, Header, Table, Button} from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom';
 import {createFragmentContainer, graphql} from 'react-relay';
 
-import RequestTableHeader from './Table.Header';
-import RequestTableRow from './Table.Row';
+import RequestTableHeader from './TableHeader';
+import RequestTableRow from './TableRow';
 
 // const _REQUESTS = [{
 //   reqId: '1jkl',
@@ -61,11 +61,7 @@ export default withRouter(
           edges {
             cursor
             node {
-              id
-              parrot
-              code
-              reason
-              status
+              ...TableRow_request
             }
           }
         }
