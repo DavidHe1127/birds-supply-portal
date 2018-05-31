@@ -47,11 +47,11 @@ class RequestTableRow extends React.Component {
         </Table.Cell>
         <Table.Cell>
           <Button.Group>
-            <Button positive onClick={this.props.onApproveClick}>
+            <Button positive onClick={this.onApproveClick}>
               Approve
             </Button>
             <Button.Or />
-            <Button negative onClick={this.props.onRejectClick}>
+            <Button negative onClick={this.onRejectClick}>
               Reject
             </Button>
           </Button.Group>
