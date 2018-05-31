@@ -1,7 +1,7 @@
 import React from 'react';
 import {Table} from 'semantic-ui-react';
 
-const titles = ['ReqID', 'Parrot', 'Code', 'Reason', 'Status', 'Actions'];
+const titles = ['ReqID', 'Parrot', 'Code', 'Reason', 'Status', ''];
 
 const RequestTableHeader = () => {
   const cells = titles.map((x, i) => (

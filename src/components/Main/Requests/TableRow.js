@@ -45,7 +45,7 @@ class RequestTableRow extends React.Component {
             {this.props.request.status.toUpperCase()}
           </Label>
         </Table.Cell>
-        <Table.Cell>
+        <Table.Cell textAlign="right">
           <Button.Group>
             <Button positive onClick={this.onApproveClick}>
               Approve

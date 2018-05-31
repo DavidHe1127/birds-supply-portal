@@ -44,7 +44,7 @@ class Requests extends React.Component {
         />
         <Header as="h1">Your Requests</Header>
         <Divider />
-        <Table celled>
+        <Table striped>
           <RequestTableHeader />
           <Table.Body>{rows}</Table.Body>
         </Table>
