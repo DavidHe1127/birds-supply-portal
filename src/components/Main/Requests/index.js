@@ -5,7 +5,6 @@ import {createFragmentContainer, graphql} from 'react-relay';
 
 import RequestTableHeader from './TableHeader';
 import RequestTableRow from './TableRow';
-import setRequestStatusMutation from 'mutations/setRequestStatusMutation';
 
 // const _REQUESTS = [{
 //   reqId: '1jkl',
@@ -29,33 +28,7 @@ import setRequestStatusMutation from 'mutations/setRequestStatusMutation';
 
 class Requests extends React.Component {
 
-  state = {
-    actionRequestId: null
-  }
-
   onNewRequestClick = e => this.props.history.push('/requests/new')
-
-  onApproveClick = e => {
-    setRequestStatusMutation({
-      id: this.status.id,
-      status: 'approved'
-    }, this.onApproved);
-  }
-
-  onRejectClick = e => {
-    setRequestStatusMutation({
-      id: this.status.id,
-      status: 'rejected'
-    }, this.onRejected);
-  }
-
-  onApproved = e => {
-
-  }
-
-  onRejected = e => {
-
-  }
 
   render() {
     const rows = this.props.viewer.requests.edges.map(x => (

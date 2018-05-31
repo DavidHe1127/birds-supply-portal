@@ -12,6 +12,15 @@ const mutation = graphql`
   }
 `;
 
+const getOptimisticResponse = (id, status) => ({
+  setRequestStatus: {
+    request: {
+      id,
+      status,
+    },
+  },
+});
+
 const setRequestStatusMutation = ({ id, status }, cb) => {
   const variables = {
     input: {
@@ -23,6 +32,7 @@ const setRequestStatusMutation = ({ id, status }, cb) => {
   commitMutation(environment, {
     mutation,
     variables,
+    optimisticResponse: getOptimisticResponse(id, status),
     onCompleted: (res, err) => {
       cb && cb();
     },

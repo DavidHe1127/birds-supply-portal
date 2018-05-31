@@ -1,6 +1,7 @@
 import React from 'react';
 import {Table, Label, Button} from 'semantic-ui-react';
 import { createFragmentContainer, graphql } from 'react-relay';
+import setRequestStatusMutation from 'mutations/setRequestStatusMutation';
 
 const STATUS_LABEL_COLOR = {
   pending: 'blue',
@@ -9,6 +10,29 @@ const STATUS_LABEL_COLOR = {
 };
 
 class RequestTableRow extends React.Component {
+
+  onApproveClick = e => {
+    setRequestStatusMutation({
+      id: this.props.request.id,
+      status: 'approved'
+    }, this.onApproved);
+  }
+
+  onRejectClick = e => {
+    setRequestStatusMutation({
+      id: this.props.request.id,
+      status: 'rejected'
+    }, this.onRejected);
+  }
+
+  onApproved = e => {
+
+  }
+
+  onRejected = e => {
+
+  }
+
   render() {
     return (
       <Table.Row>
