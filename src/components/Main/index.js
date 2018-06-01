@@ -6,6 +6,7 @@ import Products from 'components/Main/Products/Routes';
 import Events from 'containers/Main/Events';
 
 import Sidebar from 'components/Sidebar';
+import Messageinbox from 'components/Messageinbox';
 
 const MainWrapper = styled.div`
   margin: 10px 10px 10px 160px;
@@ -21,6 +22,7 @@ const withSidebar = C =>
           <MainWrapper>
             <C path={pathname} />
           </MainWrapper>
+          <Messageinbox />
         </div>
       );
     }
