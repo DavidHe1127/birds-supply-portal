@@ -1,6 +1,5 @@
-* Users being created from AWS management console...
-Users will be on `FORCE_CHANGE_PASSWORD` when being created from `Cognito` in AWS management console.
-Run cli below to help them reset the new password.
+* Prepare users
+Any users that are created from AWS management console need to go through steps below before they can login
 
   1. Update required attributes including *given_name,gender,phone_number,profile*
     Please note correct format for phone number is like *+61000000000*
