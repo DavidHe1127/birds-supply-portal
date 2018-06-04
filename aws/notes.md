@@ -1,4 +1,4 @@
-* Admin respond to regular user auth challenge
+* Users being created from AWS management console...
 Users will be on `FORCE_CHANGE_PASSWORD` when being created from `Cognito` in AWS management console.
 Run cli below to help them reset the new password.
 
