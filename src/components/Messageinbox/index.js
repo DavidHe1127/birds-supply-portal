@@ -2,6 +2,8 @@ import React from 'react';
 import {Icon, Label} from 'semantic-ui-react';
 import styled from 'styled-components';
 
+import newBirdRequest from 'apis/newBirdRequest';
+
 const Wrapper = styled.div`
   position: absolute;
   top: 30px;
@@ -13,13 +15,30 @@ const Wrapper = styled.div`
   }
 `;
 
-const Messageinbox = () => (
-  <Wrapper>
-    <Icon name="bell" size="big" />
-    <Label color="red" floating circular>
-      22
-    </Label>
-  </Wrapper>
-);
+class Messageinbox extends React.PureComponent {
+  state = {
+    count: 0,
+  }
+
+  async componentDidMount() {
+    const msg = await newBirdRequest.get();
+    this.setState({
+      count: msg.message.Messages.length
+    });
+  }
+
+  render() {
+    return (
+      <Wrapper>
+        <Icon name="bell" size="big" />
+        {!!this.state.count && (
+          <Label color="red" floating circular>
+            {this.state.count}
+          </Label>
+        )}
+      </Wrapper>
+    );
+  }
+}
 
 export default Messageinbox;

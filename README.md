@@ -76,4 +76,5 @@ const productsQuery = graphql`
 * gardening
 
 ### Issues
-* Failed operation on s3 image upload through api gateway due to 401 status code does not ask users to re-authenticate
+* Failed operation on s3 image upload through api gateway due to failing authentication does not ask users to re-authenticate
+* Switch between routes cause globally-shared component such as notification and side bar remount
