@@ -62,6 +62,7 @@ export default withRouter(
           edges {
             cursor
             node {
+              id
               ...TableRow_request
             }
           }
