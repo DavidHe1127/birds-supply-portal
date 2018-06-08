@@ -12,26 +12,27 @@ const MainWrapper = styled.div`
   margin: 10px 10px 10px 160px;
 `;
 
-const withSidebar = C =>
-  class extends React.Component {
-    render() {
-      const { location: { pathname } } = this.props;
-      return (
-        <div>
-          <Sidebar path={pathname} />
-          <MainWrapper>
-            <C path={pathname} />
-          </MainWrapper>
-          <Messageinbox />
-        </div>
-      );
-    }
-  };
-
-const Main = {
-  Requests: withSidebar(Requests),
-  Products: withSidebar(Products),
-  Events: withSidebar(Events)
+const Cs = {
+  requests: Requests,
+  products: Products,
+  events: Events
 };
+
+class Main extends React.PureComponent {
+  render() {
+    const {location: {pathname}} = this.props;
+    const C = Cs[pathname.substr(1)]
+
+    return (
+      <div>
+        <Sidebar path={pathname} />
+        <MainWrapper>
+          <C path={pathname} />
+        </MainWrapper>
+        <Messageinbox />
+      </div>
+    );
+  }
+}
 
 export default Main;

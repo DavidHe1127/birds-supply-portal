@@ -53,9 +53,9 @@ ReactDOM.render(
         <Route exact path='/' component={() => <Redirect to='/login' />} />
         <Route path='/login' component={Login} />
         <Route path='/signup' component={Signup} />
-        <PrivateRoute path='/products' component={Main.Products} />
-        <PrivateRoute path='/events' component={Main.Events} />
-        <PrivateRoute path='/requests' component={Main.Requests} />
+        <PrivateRoute path='/products' component={Main} />
+        <PrivateRoute path='/events' component={Main} />
+        <PrivateRoute path='/requests' component={Main} />
       </Switch>
     </Router>
   </Provider>,
