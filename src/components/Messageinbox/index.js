@@ -22,9 +22,12 @@ class Messageinbox extends React.PureComponent {
 
   async componentDidMount() {
     const msg = await newBirdRequest.get();
-    this.setState({
-      count: msg.message.Messages.length
-    });
+
+    if (msg.message.Messages) {
+      this.setState({
+        count: msg.message.Messages.length
+      });
+    }
   }
 
   render() {
