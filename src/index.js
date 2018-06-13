@@ -12,8 +12,8 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 // load global state into store via react new context api
 import { Provider } from './store';
 
-import auth from './auth';
 import { init } from './utils/buildUrl';
+import PrivateRoute from 'helpers/PrivateRoute';
 
 import Main from 'components/Main';
 import Login from 'containers/Login';
@@ -27,24 +27,6 @@ Amplify.configure({
 });
 
 init(process.env.REACT_APP_FILE_HANDLER_API, process.env.REACT_APP_FILE_HANDLER_BUCKET);
-
-const PrivateRoute = ({component: Component, ...rest}) => (
-  <Route
-    {...rest}
-    render={props =>
-      auth.hasAuth() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/login',
-            state: {from: props.location}
-          }}
-        />
-      )
-    }
-  />
-);
 
 ReactDOM.render(
   <Provider>
