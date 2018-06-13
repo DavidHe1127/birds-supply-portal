@@ -9,25 +9,22 @@ const upload = ({url, file, token}) => {
   });
 };
 
-const poll = (fn, timeout, interval) => {
-  const endTime = Number(new Date()) + (timeout || 2000);
-  interval = interval || 100;
+let pollId;
 
-  const checkCondition = (resolve, reject) => {
-    // If the condition is met, we're done!
-    var result = fn();
-    if (result) {
-      resolve(result);
-    } else if (Number(new Date()) < endTime) {
-      // If the condition isn't met but the timeout hasn't elapsed, go again
-      setTimeout(checkCondition, interval, resolve, reject);
-    } else {
-      // Didn't match and too much time, reject!
-      reject(new Error('timed out for ' + fn + ': ' + arguments));
-    }
+const poll = (generator, callback) => {
+  const g = generator();
+
+  const x = g2 => {
+    const p = g.next();
+    p.value.then(res => {
+      callback(res);
+      pollId = setTimeout(x, 5000, g);
+    });
   };
 
-  return new Promise(checkCondition);
+  return x;
 };
 
-export {upload, poll};
+const removeTimeout = () => clearTimeout(pollId);
+
+export {upload, poll, removeTimeout};

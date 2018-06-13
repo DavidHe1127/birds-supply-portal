@@ -1,6 +1,7 @@
 import React from 'react';
 import {Icon, Label} from 'semantic-ui-react';
 import styled from 'styled-components';
+import { poll, removeTimeout } from 'utils/network';
 
 import newBirdRequest from 'apis/newBirdRequest';
 
@@ -15,19 +16,38 @@ const Wrapper = styled.div`
   }
 `;
 
+// poll(function() {
+//   return 'xxx';
+// }, 2000, 2000);
+
 class Messageinbox extends React.PureComponent {
-  state = {
-    count: 0,
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      count: 0
+    };
+
+    this.refetch = poll(newBirdRequest.get, this.onc);
+
+  }
+
+  onc = res => {
+    console.log(res);
   }
 
   async componentDidMount() {
-    const msg = await newBirdRequest.get();
+    this.refetch();
+    // if (msg.message.Messages) {
+    //   this.setState({
+    //     count: msg.message.Messages.length
+    //   });
+    // }
+  }
 
-    if (msg.message.Messages) {
-      this.setState({
-        count: msg.message.Messages.length
-      });
-    }
+  componentWillUnmount() {
+    removeTimeout();
   }
 
   render() {
