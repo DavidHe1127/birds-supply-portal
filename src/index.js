@@ -7,6 +7,8 @@ import config from './config.json';
 // sprinkle our styles on top
 import './index.css';
 
+// this is a showcase
+
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 // load global state into store via react new context api
