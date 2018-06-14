@@ -3,7 +3,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 
 import { Container } from 'semantic-ui-react';
 
-import Form from 'containers/Main/Products/Form';
+import NewProductForm from 'containers/Main/Products/NewProductForm';
 
 // import src from 'images/elliot.jpg';
 import './styles/index.css';
@@ -14,7 +14,7 @@ class NewProduct extends React.Component {
 
     return (
       <Container text>
-        <Form {...{ parrotsToProduct }} isNew />
+        <NewProductForm {...{ parrotsToProduct }} isNew />
       </Container>
     );
   }

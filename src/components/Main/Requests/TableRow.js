@@ -2,6 +2,7 @@ import React from 'react';
 import {Table, Label, Button} from 'semantic-ui-react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import setRequestStatusMutation from 'mutations/setRequestStatusMutation';
+import newBirdRequest from 'apis/newBirdRequest';
 
 const STATUS_LABEL_COLOR = {
   pending: 'blue',
@@ -26,11 +27,17 @@ class RequestTableRow extends React.Component {
   }
 
   onApproved = e => {
-
+    newBirdRequest.make({
+      status: 'approved',
+      reason: 'I love u'
+    });
   }
 
   onRejected = e => {
-
+    newBirdRequest.make({
+      status: 'rejected',
+      reason: 'I hate u'
+    });
   }
 
   render() {
