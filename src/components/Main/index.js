@@ -21,7 +21,7 @@ const Cs = {
 class Main extends React.PureComponent {
   render() {
     const {location: {pathname}} = this.props;
-    const C = Cs[pathname.substr(1)]
+    const C = Cs[pathname.split('/')[1]];
 
     return (
       <div>
