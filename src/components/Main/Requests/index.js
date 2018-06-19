@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {createFragmentContainer, graphql} from 'react-relay';
 
 import RequestTableHeader from './TableHeader';
-import RequestTableRow from './TableRow';
+import RequestTableRow from 'containers/Main/Requests/TableRow';
 
 // const _REQUESTS = [{
 //   reqId: '1jkl',
