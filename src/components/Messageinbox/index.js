@@ -16,10 +16,6 @@ const Wrapper = styled.div`
   }
 `;
 
-// poll(function() {
-//   return 'xxx';
-// }, 2000, 2000);
-
 class Messageinbox extends React.PureComponent {
 
   constructor(props) {
@@ -29,21 +25,19 @@ class Messageinbox extends React.PureComponent {
       count: 0
     };
 
-    this.refetch = poll(newBirdRequest.get, this.onc);
-
+    this.refetch = poll(newBirdRequest.get, this.onMessageReceived);
   }
 
-  onc = res => {
-    console.log(res);
+  onMessageReceived = res => {
+    if (res.message.Messages) {
+      this.setState({
+        count: res.message.Messages.length
+      });
+    }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.refetch();
-    // if (msg.message.Messages) {
-    //   this.setState({
-    //     count: msg.message.Messages.length
-    //   });
-    // }
   }
 
   componentWillUnmount() {
