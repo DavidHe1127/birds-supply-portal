@@ -37,8 +37,8 @@ input addRequestInput {
   reason: String
 }
 
-type addRequestPayload {
-  request: Request
+input approveRequestInput {
+  id: ID!
 }
 
 # Customer
@@ -88,8 +88,9 @@ type Mutation {
   addProduct(input: addProductInput!): addProductPayload
   delProduct(input: delProductInput!): delProductPayload
   setProduct(input: setProductInput!): setProductPayload
-  addRequest(input: addRequestInput!): addRequestPayload
-  setRequestStatus(input: setRequestStatusInput!): setRequestStatusPayload
+  addRequest(input: addRequestInput!): requestPayload
+  rejectRequest(input: rejectRequestInput!): requestPayload
+  approveRequest(input: approveRequestInput!): requestPayload
 }
 
 interface Node {
@@ -179,6 +180,15 @@ type Query {
   errors: [Error]
 }
 
+input rejectRequestInput {
+  id: ID!
+  reason: String
+}
+
+type rejectRequestPayload {
+  request: Request
+}
+
 type Request implements Node {
   id: ID!
   parrot: String
@@ -200,6 +210,10 @@ type RequestEdge {
   node: Request
 }
 
+type requestPayload {
+  request: Request
+}
+
 input setCustomerInput {
   _id: ID!
   email: String
@@ -213,15 +227,6 @@ input setProductInput {
 
 type setProductPayload {
   product: Product
-}
-
-input setRequestStatusInput {
-  id: ID!
-  status: Status
-}
-
-type setRequestStatusPayload {
-  request: Request
 }
 
 enum Species {

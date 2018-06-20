@@ -1,7 +1,8 @@
 import React from 'react';
 import {Table, Label, Button} from 'semantic-ui-react';
 import {createFragmentContainer, graphql} from 'react-relay';
-import setRequestStatusMutation from 'mutations/setRequestStatusMutation';
+import rejectRequestMutation from 'mutations/rejectRequestMutation';
+import approveRequestMutation from 'mutations/approveRequestMutation';
 import newBirdRequest from 'apis/newBirdRequest';
 import NewBirdRequestActionReason from 'components/Main/Requests/Reason';
 
@@ -14,45 +15,51 @@ const STATUS_LABEL_COLOR = {
 class RequestTableRow extends React.Component {
   state = {
     showReasonInput: false,
+    reason: null
   }
 
   onApproveClick = e => {
-    this.setState({
-      showReasonInput: true,
-    });
-    // setRequestStatusMutation({
-    //   id: this.props.request.id,
-    //   status: 'approved'
-    // }, this.onApproved);
+    approveRequestMutation({
+      id: this.props.request.id,
+    }, this.onApproved);
   }
 
   onRejectClick = e => {
-    setRequestStatusMutation(
-      {
-        id: this.props.request.id,
-        status: 'rejected',
-      },
-      this.onRejected,
-    );
+    this.setState({
+      showReasonInput: true
+    });
   }
 
   onApproved = e => {
     newBirdRequest.make({
       status: 'approved',
-      reason: 'I love u',
+      reason: '',
     });
   }
 
   onRejected = e => {
     newBirdRequest.make({
       status: 'rejected',
-      reason: 'I hate u',
+      reason: this.state.reason
     });
   }
 
   onReasonInputDone = e => {
     this.setState({
       showReasonInput: false
+    });
+    rejectRequestMutation(
+      {
+        id: this.props.request.id,
+        reason: this.state.reason
+      },
+      this.onRejected,
+    );
+  }
+
+  onReasonChange = (e, data) => {
+    this.setState({
+      reason: data.value
     });
   }
 
@@ -81,7 +88,7 @@ class RequestTableRow extends React.Component {
             </Button.Group>
           </Table.Cell>
         </Table.Row>
-        {this.state.showReasonInput && <NewBirdRequestActionReason onDone={this.onReasonInputDone} />}
+        {this.state.showReasonInput && <NewBirdRequestActionReason onDone={this.onReasonInputDone} onChange={this.onReasonChange} />}
       </React.Fragment>
     );
   }
