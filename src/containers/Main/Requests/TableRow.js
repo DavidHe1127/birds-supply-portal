@@ -31,14 +31,14 @@ class RequestTableRow extends React.Component {
   }
 
   onApproved = e => {
-    newBirdRequest.make({
+    newBirdRequest.pushResult({
       status: 'approved',
       reason: '',
     });
   }
 
   onRejected = e => {
-    newBirdRequest.make({
+    newBirdRequest.pushResult({
       status: 'rejected',
       reason: this.state.reason
     });
