@@ -2,6 +2,7 @@ import React from 'react';
 import {Icon, Label} from 'semantic-ui-react';
 import styled from 'styled-components';
 import { poll, removeTimeout } from 'utils/network';
+import {actions, connect} from 'store';
 
 import newBirdRequest from 'apis/newBirdRequest';
 
@@ -30,6 +31,10 @@ class Messageinbox extends React.PureComponent {
 
   onMessageReceived = res => {
     if (res.message.Messages) {
+      actions.updateNewBirdRequestResultNotifications({
+        newBirdRequestResultNotifications: res.message.Messages
+      });
+
       this.setState({
         count: res.message.Messages.length
       });
@@ -58,4 +63,6 @@ class Messageinbox extends React.PureComponent {
   }
 }
 
-export default Messageinbox;
+export default connect(state => ({
+  newBirdRequestResultNotifications: state.newBirdRequestResultNotifications
+}))(Messageinbox);
