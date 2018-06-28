@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import Requests from 'components/Main/Requests/Routes';
 import Products from 'components/Main/Products/Routes';
 import Events from 'containers/Main/Events';
+import Messages from 'components/Main/Messages';
 
 import Sidebar from 'components/Sidebar';
-import Messageinbox from 'components/Messageinbox';
+import Notifications from 'components/Main/Messages/Notifications';
 
 const MainWrapper = styled.div`
   margin: 10px 10px 10px 160px;
@@ -15,13 +16,15 @@ const MainWrapper = styled.div`
 const Cs = {
   requests: Requests,
   products: Products,
-  events: Events
+  events: Events,
+  messages: Messages
 };
 
 class Main extends React.PureComponent {
   render() {
     const {location: {pathname}} = this.props;
-    const C = Cs[pathname.split('/')[1]];
+    const path = pathname.split('/')[1];
+    const C = Cs[path];
 
     return (
       <div>
@@ -29,7 +32,7 @@ class Main extends React.PureComponent {
         <MainWrapper>
           <C path={pathname} />
         </MainWrapper>
-        <Messageinbox />
+        {path !== 'messages' && <Notifications />}
       </div>
     );
   }

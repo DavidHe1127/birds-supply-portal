@@ -3,6 +3,7 @@ import {Icon, Label} from 'semantic-ui-react';
 import styled from 'styled-components';
 import { poll, removeTimeout } from 'utils/network';
 import {actions, connect} from 'store';
+import {withRouter} from 'react-router-dom';
 
 import newBirdRequest from 'apis/newBirdRequest';
 
@@ -17,7 +18,7 @@ const Wrapper = styled.div`
   }
 `;
 
-class Messageinbox extends React.PureComponent {
+class Notifications extends React.PureComponent {
 
   constructor(props) {
     super(props);
@@ -41,6 +42,10 @@ class Messageinbox extends React.PureComponent {
     }
   }
 
+  onNotificationsClick = res => {
+    this.props.history.push('/messages');
+  }
+
   componentDidMount() {
     this.refetch();
   }
@@ -52,7 +57,7 @@ class Messageinbox extends React.PureComponent {
   render() {
     return (
       <Wrapper>
-        <Icon name="bell" size="big" />
+        <Icon name="bell" size="big" onClick={this.onNotificationsClick} />
         {!!this.state.count && (
           <Label color="red" floating circular>
             {this.state.count}
@@ -65,4 +70,4 @@ class Messageinbox extends React.PureComponent {
 
 export default connect(state => ({
   newBirdRequestResultNotifications: state.newBirdRequestResultNotifications
-}))(Messageinbox);
+}))(withRouter(Notifications));
