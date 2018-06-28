@@ -1,5 +1,6 @@
 import React from 'react';
 import {Container, Divider, Header, Table, Icon} from 'semantic-ui-react';
+import {actions, connect} from 'store';
 
 // import RequestTableHeader from './TableHeader';
 // import RequestTableRow from 'containers/Main/Requests/TableRow';
@@ -25,6 +26,11 @@ import {Container, Divider, Header, Table, Icon} from 'semantic-ui-react';
 // }];
 
 class Messages extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <Container>
@@ -75,4 +81,6 @@ class Messages extends React.Component {
 //          <RequestTableHeader />
 //          <Table.Body></Table.Body>
 
-export default Messages;
+export default connect(state => ({
+  newBirdRequestResultNotifications: state.newBirdRequestResultNotifications
+}))(Messages);
