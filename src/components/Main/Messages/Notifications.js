@@ -43,7 +43,9 @@ class Notifications extends React.PureComponent {
   }
 
   onNotificationsClick = res => {
-    this.props.history.push('/messages');
+    if (this.state.count > 0) {
+      this.props.history.push('/messages');
+    }
   }
 
   componentDidMount() {

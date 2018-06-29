@@ -26,12 +26,31 @@ import {actions, connect} from 'store';
 // }];
 
 class Messages extends React.Component {
-
   constructor(props) {
     super(props);
   }
 
   render() {
+    const messages = this.props.newBirdRequestResultNotifications.map(x => {
+      const body = JSON.parse(x.Body);
+      const message = JSON.parse(body.Message);
+      const props = {};
+
+      if (message.status.toLowerCase() === 'rejected') {
+        props.negative = true;
+      } else {
+        props.positive = true;
+      }
+
+      return (
+        <Table.Row key={x.MessageId}>
+          <Table.Cell>{x.MessageId}</Table.Cell>
+          <Table.Cell {...props}>{message.status}</Table.Cell>
+          <Table.Cell>{message.reason}</Table.Cell>
+        </Table.Row>
+      );
+    });
+
     return (
       <Container>
         <Header as="h1">Your Requests</Header>
@@ -39,13 +58,24 @@ class Messages extends React.Component {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell>Id</Table.HeaderCell>
               <Table.HeaderCell>Status</Table.HeaderCell>
-              <Table.HeaderCell>Notes</Table.HeaderCell>
+              <Table.HeaderCell>Feedback</Table.HeaderCell>
+              <Table.HeaderCell />
             </Table.Row>
           </Table.Header>
-
           <Table.Body>
+            {messages}
+          </Table.Body>
+        </Table>
+      </Container>
+    );
+  }
+}
+//          <RequestTableHeader />
+//          <Table.Body></Table.Body>
+
+/*
             <Table.Row>
               <Table.Cell>No Name Specified</Table.Cell>
               <Table.Cell>Unknown</Table.Cell>
@@ -72,15 +102,8 @@ class Messages extends React.Component {
               <Table.Cell>Unknown</Table.Cell>
               <Table.Cell>None</Table.Cell>
             </Table.Row>
-          </Table.Body>
-        </Table>
-      </Container>
-    );
-  }
-}
-//          <RequestTableHeader />
-//          <Table.Body></Table.Body>
+*/
 
 export default connect(state => ({
-  newBirdRequestResultNotifications: state.newBirdRequestResultNotifications
+  newBirdRequestResultNotifications: state.newBirdRequestResultNotifications,
 }))(Messages);
