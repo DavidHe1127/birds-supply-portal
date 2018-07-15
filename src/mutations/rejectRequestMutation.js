@@ -2,37 +2,37 @@ import { commitMutation, graphql } from 'react-relay';
 import environment from 'Environment';
 
 const mutation = graphql`
-  mutation setRequestStatusMutation($input: setRequestStatusInput!) {
-    setRequestStatus(input: $input) {
+  mutation rejectRequestMutation($input: rejectRequestInput!) {
+    rejectRequest(input: $input) {
       request {
         id
         status
+        reason
       }
     }
   }
 `;
 
-const getOptimisticResponse = (id, status) => ({
-  setRequestStatus: {
-    request: {
-      id,
-      status,
-    },
+const getOptimisticResponse = (id, reason) => ({
+  rejectRequest: {
+    id,
+    status: 'rejected',
+    reason
   },
 });
 
-const setRequestStatusMutation = ({ id, status }, cb) => {
+const rejectRequestMutation = ({ id, reason }, cb) => {
   const variables = {
     input: {
       id,
-      status
+      reason
     }
   };
 
   commitMutation(environment, {
     mutation,
     variables,
-    optimisticResponse: getOptimisticResponse(id, status),
+    optimisticResponse: getOptimisticResponse(id, reason),
     onCompleted: (res, err) => {
       cb && cb();
     },
@@ -40,4 +40,4 @@ const setRequestStatusMutation = ({ id, status }, cb) => {
   });
 };
 
-export default setRequestStatusMutation;
+export default rejectRequestMutation;

@@ -10,21 +10,25 @@ function* get() {
   }
 }
 
-function make(feedback) {
+function pushResult({status, reason}) {
   fetch(`${process.env.REACT_APP_NEW_BIRD_REQUEST_API}/new-bird-request`, {
     headers: {
       Authorization: `${auth.get('idToken').jwtToken}`,
+      'content-type': 'application/json'
     },
     method: 'POST',
     body: JSON.stringify({
-      note: feedback
+      payload: {
+        status,
+        reason
+      }
     })
   }).then(res => res.json());
 }
 
 const newBirdRequest = {
   get,
-  make
+  pushResult
 };
 
 export default newBirdRequest;

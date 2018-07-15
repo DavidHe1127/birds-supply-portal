@@ -40,6 +40,7 @@ ReactDOM.render(
         <PrivateRoute path='/products' component={Main} />
         <PrivateRoute path='/events' component={Main} />
         <PrivateRoute path='/requests' component={Main} />
+        <PrivateRoute path='/messages' component={Main} />
       </Switch>
     </Router>
   </Provider>,
