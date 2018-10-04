@@ -54,7 +54,8 @@
     "babel-plugin-relay": "^1.6.0",
     "get-graphql-schema": "^2.1.1",
     "graphql": "^0.13.2",
-    "relay-compiler": "^1.6.0"
+    "relay-compiler": "^1.6.0",
+    "semantic-ui-css": "^2.4.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -62,7 +63,8 @@
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
     "relay:watch": "npm run relay -- --watch",
     "get:schema": "npx get-graphql-schema http://127.0.0.1:4000/graphql > schema.graphql",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "jest": {
     "collectCoverageFrom": [
